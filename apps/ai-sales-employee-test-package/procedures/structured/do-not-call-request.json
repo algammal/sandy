@@ -1,0 +1,10 @@
+{
+  "procedure_id": "agtprc_8501m5dptv0yex8teh6z17wnpy01",
+  "version_id": "agtprcv_6201m5dq0z08f5prtspehwdy5mhp",
+  "name": "Do-not-call request",
+  "type": "deterministic",
+  "trigger": "The prospect asks not to be called or contacted again, asks to be removed from the list, or says to stop calling, in any wording or language (e.g. \"متتصلوش بيا تاني\", \"شيلوا رقمي\", \"don't call me again\").",
+  "content": "{\"steps\":[{\"type\":\"say\",\"message\":\"تمام، هسجّل إن محدش يتصل بحضرتك تاني. آسفة على الإزعاج، ويومك سعيد.\",\"message_translations\":{\"en\":{\"value\":\"Understood, I'll make sure we don't call you again. Sorry for the interruption, have a good day.\"}}},{\"type\":\"system_tool\",\"system_tool_name\":\"end_call\"}]}",
+  "guardrails": [],
+  "referenced_procedure_ids": []
+}

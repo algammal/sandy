@@ -1,0 +1,118 @@
+{
+  "tool_config": {
+    "type": "webhook",
+    "name": "sales_flow_step",
+    "description": "Reports the prospect's latest stage-relevant reply to the sales flow controller, which decides the next stage. Call it before answering whenever the reply changes the situation.",
+    "response_timeout_secs": 8,
+    "pre_tool_speech": "off",
+    "tool_error_handling_mode": "summarized",
+    "api_schema": {
+      "url": "https://REPLACE-WITH-YOUR-BACKEND/tools/sales-flow",
+      "method": "POST",
+      "request_headers": {
+        "x-sales-flow-secret": {
+          "secret_id": "REPLACE-WITH-ELEVENLABS-SECRET-ID"
+        }
+      },
+      "request_body_schema": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "intent"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "dynamic_variable": "system__conversation_id"
+          },
+          "intent": {
+            "type": "string",
+            "description": "The single intent that best matches the prospect's latest reply.",
+            "enum": [
+              "permission_granted",
+              "callback_requested",
+              "permission_declined",
+              "human_requested",
+              "discovery_answer",
+              "discovery_complete",
+              "discovery_declined",
+              "question_asked",
+              "objection_raised",
+              "objection_resolved",
+              "escalation_needed",
+              "presentation_done",
+              "prospect_declined",
+              "next_step_agreed",
+              "no_next_step",
+              "follow_up_captured",
+              "follow_up_declined",
+              "clarification_needed",
+              "dnc_requested"
+            ]
+          },
+          "objection_ids": {
+            "type": "string",
+            "description": "For objection_raised / question_asked: comma-separated registry ids, e.g. \"asks_for_pricing,already_uses_crm\". Valid ids: already_has_sales_team, already_uses_crm, prefers_real_people, concerned_about_ai_voice, asks_for_pricing, how_does_it_know_inventory, fits_existing_workflow, measuring_performance, privacy_concern, requests_case_study, send_information, needs_management_approval, requests_human."
+          },
+          "escalate": {
+            "type": "boolean",
+            "description": "True only if the concern needs the human team (pricing, legal, technical specifics) per the registry."
+          },
+          "field": {
+            "type": "string",
+            "description": "For discovery_answer: which fact the prospect just gave.",
+            "enum": [
+              "current_lead_process",
+              "primary_challenge",
+              "company_name",
+              "contact_role",
+              "sales_team_size",
+              "lead_volume",
+              "current_crm"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "For discovery_answer: the fact in a few words, as stated. Empty if they did not really answer."
+          },
+          "early_presentation": {
+            "type": "boolean",
+            "description": "For discovery_complete: true only if the prospect explicitly asked what the product is."
+          },
+          "next_step": {
+            "type": "string",
+            "description": "For next_step_agreed: the step the prospect explicitly agreed to.",
+            "enum": [
+              "demo_requested",
+              "meeting_requested",
+              "human_callback_requested",
+              "proposal_requested",
+              "information_requested",
+              "ai_callback_later"
+            ]
+          },
+          "callback_time": {
+            "type": "string",
+            "description": "For follow_up_captured: day/time window in the prospect's words."
+          },
+          "channel": {
+            "type": "string",
+            "description": "For follow_up_captured: preferred contact method.",
+            "enum": [
+              "phone",
+              "email",
+              "whatsapp"
+            ]
+          }
+        }
+      }
+    },
+    "assignments": [
+      {
+        "dynamic_variable": "flow_next_node",
+        "value_path": "next_node",
+        "source": "response"
+      }
+    ]
+  }
+}

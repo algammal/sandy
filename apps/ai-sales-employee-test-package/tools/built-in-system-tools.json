@@ -1,0 +1,51 @@
+{
+  "end_call": {
+    "type": "system",
+    "name": "end_call",
+    "description": "End the call after you have said your closing sentence. Use it when: the conversation has reached an agreed next step; the customer is not interested; the customer asks not to be called again (after the do-not-call confirmation sentence); it is a wrong number or wrong person; the line is unclear after one retry; or the customer is abusive.",
+    "response_timeout_secs": 20,
+    "disable_interruptions": false,
+    "interruption_mode": "allow",
+    "force_pre_tool_speech": false,
+    "pre_tool_speech": "auto",
+    "assignments": [],
+    "tool_call_sound_behavior": "auto",
+    "tool_error_handling_mode": "auto",
+    "params": {
+      "system_tool_type": "end_call"
+    }
+  },
+  "language_detection": {
+    "type": "system",
+    "name": "language_detection",
+    "description": "Switch to English only if the prospect speaks a full turn in English or asks for English. Brief English terms (CRM, leads, demo) inside Arabic sentences are NOT a reason to switch.",
+    "response_timeout_secs": 20,
+    "disable_interruptions": false,
+    "interruption_mode": "allow",
+    "force_pre_tool_speech": false,
+    "pre_tool_speech": "auto",
+    "assignments": [],
+    "tool_call_sound_behavior": "auto",
+    "tool_error_handling_mode": "auto",
+    "params": {
+      "system_tool_type": "language_detection",
+      "only_at_conversation_start": false
+    }
+  },
+  "voicemail_detection": {
+    "type": "system",
+    "name": "voicemail_detection",
+    "description": "Use immediately when the call is answered by a voicemail greeting, answering machine, or carrier message instead of a live person. Do not pitch to a recording.",
+    "response_timeout_secs": 20,
+    "disable_interruptions": false,
+    "interruption_mode": "allow",
+    "force_pre_tool_speech": false,
+    "pre_tool_speech": "auto",
+    "assignments": [],
+    "tool_call_sound_behavior": "auto",
+    "tool_error_handling_mode": "auto",
+    "params": {
+      "system_tool_type": "voicemail_detection"
+    }
+  }
+}

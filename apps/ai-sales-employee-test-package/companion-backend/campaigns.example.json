@@ -1,0 +1,13 @@
+{
+  "id": "ai-sales-employee-pilot",
+  "name": "AI Sales Employee - B2B pilot",
+  "status": "active",
+  "campaign_focus": "AI Sales Employee for real estate sales teams",
+  "compliance_approved": false,
+  "calling_hours": { "days": [0, 1, 2, 3, 4], "start": "10:00", "end": "19:00" },
+  "retry_policy": {
+    "max_attempts": 3,
+    "min_hours_between_attempts": 4,
+    "cooldown_days_after_conversation": 7
+  }
+}

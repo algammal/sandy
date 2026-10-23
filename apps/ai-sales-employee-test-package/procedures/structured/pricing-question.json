@@ -1,0 +1,12 @@
+{
+  "procedure_id": "agtprc_1701m5dptw8rets9qxfwdzgw1h83",
+  "version_id": "agtprcv_9901m5dq0z0gf1h8at13njp7smr5",
+  "name": "Pricing question",
+  "type": "deterministic",
+  "trigger": "The prospect asks about the price, cost, fees, packages, contract terms or discounts of the AI Sales Employee (e.g. \"بكام\", \"التكلفة كام\", \"how much does it cost\").",
+  "content": "{\"steps\":[{\"type\":\"say\",\"message\":\"التكلفة بتختلف حسب احتياج كل شركة، وفريق المبيعات بيجهّز عرض مخصوص بعد ما يفهم احتياجكم، فمش هقدر أقول رقم دلوقتي.\",\"message_translations\":{\"en\":{\"value\":\"The cost depends on each company's needs, and our sales team prepares a tailored proposal once they understand yours, so I can't give a number right now.\"}}},{\"type\":\"ask\",\"instruction\":\"Ask in one short question whether they would like a short meeting with our sales team to prepare the pricing for them. Never mention any number, range or discount.\"},{\"type\":\"branch\",\"branches\":[{\"condition\":{\"type\":\"llm\",\"condition\":\"The prospect agreed to a meeting or a call with the sales team.\"},\"steps\":[{\"type\":\"sub_procedure\",\"procedure_id\":\"agtprc_0401m5dpqs04e61be40h79m5wzcz\"},{\"type\":\"say\",\"message\":\"شكراً جداً لوقت حضرتك، مع السلامة.\",\"message_translations\":{\"en\":{\"value\":\"Thank you very much for your time. Goodbye.\"}}},{\"type\":\"system_tool\",\"system_tool_name\":\"end_call\"}]},{\"condition\":{\"type\":\"llm\",\"condition\":\"The prospect did not agree to a meeting, declined, or wants to continue the conversation first.\"},\"steps\":[{\"type\":\"tell\",\"instruction\":\"Acknowledge briefly in one sentence without pressure, then continue the conversation where it was. Do not mention pricing again unless they ask.\"}]}]}]}",
+  "guardrails": [],
+  "referenced_procedure_ids": [
+    "agtprc_0401m5dpqs04e61be40h79m5wzcz"
+  ]
+}

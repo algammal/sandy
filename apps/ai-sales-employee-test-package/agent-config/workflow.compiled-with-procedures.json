@@ -1,0 +1,1538 @@
+{
+  "edges": {
+    "discovery_to_close": {
+      "source": "discovery",
+      "target": "close",
+      "forward_condition": {
+        "label": "discovery_to_close",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect declined to continue the conversation."
+      }
+    },
+    "discovery_to_dnc": {
+      "source": "discovery",
+      "target": "dnc",
+      "forward_condition": {
+        "label": "discovery_to_dnc",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+      }
+    },
+    "discovery_to_follow_up": {
+      "source": "discovery",
+      "target": "follow_up",
+      "forward_condition": {
+        "label": "discovery_to_follow_up",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect asked to speak with a person from the sales team instead of the AI."
+      }
+    },
+    "discovery_to_next_step": {
+      "source": "discovery",
+      "target": "next_step",
+      "forward_condition": {
+        "label": "discovery_to_next_step",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect does not want to answer questions but is still willing to hear about a next step."
+      }
+    },
+    "discovery_to_presentation": {
+      "source": "discovery",
+      "target": "presentation",
+      "forward_condition": {
+        "label": "discovery_to_presentation",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect has described how their company handles leads today AND their main sales challenge; OR they asked directly what the product does; OR four discovery questions have already been asked."
+      }
+    },
+    "follow_up_to_close": {
+      "source": "follow_up",
+      "target": "close",
+      "forward_condition": {
+        "label": "follow_up_to_close",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The preferred time and contact method for the follow-up have been captured, or the prospect declined to give them."
+      }
+    },
+    "follow_up_to_dnc": {
+      "source": "follow_up",
+      "target": "dnc",
+      "forward_condition": {
+        "label": "follow_up_to_dnc",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+      }
+    },
+    "next_step_to_close": {
+      "source": "next_step",
+      "target": "close",
+      "forward_condition": {
+        "label": "next_step_to_close",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect does not want any next step."
+      }
+    },
+    "next_step_to_dnc": {
+      "source": "next_step",
+      "target": "dnc",
+      "forward_condition": {
+        "label": "next_step_to_dnc",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+      }
+    },
+    "next_step_to_follow_up": {
+      "source": "next_step",
+      "target": "follow_up",
+      "forward_condition": {
+        "label": "next_step_to_follow_up",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect agreed to a specific next step: a demo, a meeting, a callback from the sales team, a proposal, information to be sent, or a later call."
+      }
+    },
+    "objection_to_close": {
+      "source": "objection",
+      "target": "close",
+      "forward_condition": {
+        "label": "objection_to_close",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "After the concern was addressed, the prospect clearly declined the solution."
+      }
+    },
+    "objection_to_dnc": {
+      "source": "objection",
+      "target": "dnc",
+      "forward_condition": {
+        "label": "objection_to_dnc",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+      }
+    },
+    "objection_to_follow_up": {
+      "source": "objection",
+      "target": "follow_up",
+      "forward_condition": {
+        "label": "objection_to_follow_up",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect asked to speak with a person from the sales team instead of the AI."
+      }
+    },
+    "objection_to_next_step": {
+      "source": "objection",
+      "target": "next_step",
+      "forward_condition": {
+        "label": "objection_to_next_step",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The concern was addressed and the prospect is ready to discuss next steps; OR the same concern came up twice without resolution; OR the question needs our human team (pricing, contracts, technical integration details, legal or data questions)."
+      }
+    },
+    "permission_to_close": {
+      "source": "permission",
+      "target": "close",
+      "forward_condition": {
+        "label": "permission_to_close",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect declined to talk, said they are not interested, or this is the wrong person or company."
+      }
+    },
+    "permission_to_discovery": {
+      "source": "permission",
+      "target": "discovery",
+      "forward_condition": {
+        "label": "permission_to_discovery",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect agreed that now is a good time to talk."
+      }
+    },
+    "permission_to_dnc": {
+      "source": "permission",
+      "target": "dnc",
+      "forward_condition": {
+        "label": "permission_to_dnc",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+      }
+    },
+    "permission_to_follow_up": {
+      "source": "permission",
+      "target": "follow_up",
+      "forward_condition": {
+        "label": "permission_to_follow_up",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect is busy and open to a callback at another time, or asked to speak with a person."
+      }
+    },
+    "presentation_to_close": {
+      "source": "presentation",
+      "target": "close",
+      "forward_condition": {
+        "label": "presentation_to_close",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect clearly said they are not interested in the solution."
+      }
+    },
+    "presentation_to_dnc": {
+      "source": "presentation",
+      "target": "dnc",
+      "forward_condition": {
+        "label": "presentation_to_dnc",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+      }
+    },
+    "presentation_to_follow_up": {
+      "source": "presentation",
+      "target": "follow_up",
+      "forward_condition": {
+        "label": "presentation_to_follow_up",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect asked to speak with a person from the sales team instead of the AI."
+      }
+    },
+    "presentation_to_next_step": {
+      "source": "presentation",
+      "target": "next_step",
+      "forward_condition": {
+        "label": "presentation_to_next_step",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect has heard how the AI Sales Employee could help them and either shows interest, asks how to proceed, or says they need time or internal approval."
+      }
+    },
+    "presentation_to_objection": {
+      "source": "presentation",
+      "target": "objection",
+      "forward_condition": {
+        "label": "presentation_to_objection",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The prospect raised a concern or objection, or asked a question about pricing, privacy, integrations, how natural the AI sounds, or how it would work for them."
+      },
+      "backward_condition": {
+        "label": "presentation_to_objection_return",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The concern or question has been answered and the prospect is willing to hear more."
+      }
+    },
+    "start_to_permission": {
+      "source": "start_node",
+      "target": "permission",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/e/1": {
+      "source": "__xi_procedure__procedure_entry_agtprc_0401m5dpqs04e61be40h79m5wzcz",
+      "target": "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/ask_2/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask, in one short question, which day and time window suits them for our sales team to contact them (for example morning or afternoon). If they decline to give a time, accept that and move on.\"\n\nAND\n\nThe end user has given an appropriate response"
+      }
+    },
+    "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/e/2": {
+      "source": "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/ask_2/override_agent_1",
+      "target": "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/tell_3/say_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask, in one short question, whether they prefer to be contacted by phone, WhatsApp or email. If they have no preference, accept that and move on.\"\n\nAND\n\nThe end user has given an appropriate response"
+      }
+    },
+    "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/e/3": {
+      "source": "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/tell_3/say_1",
+      "target": "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/end_procedure_4/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/e/1": {
+      "source": "__xi_procedure__procedure_entry_agtprc_1101m5dptz35fg2regd0w0w24rg5",
+      "target": "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/say_2/say_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask in one short question whether they prefer to receive it by WhatsApp or email.\"\n\nAND\n\nThe end user has given an appropriate response"
+      }
+    },
+    "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/e/2": {
+      "source": "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/say_2/say_1",
+      "target": "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/tell_3/say_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/e/3": {
+      "source": "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/tell_3/say_1",
+      "target": "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/end_procedure_4/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/1": {
+      "source": "__xi_procedure__procedure_entry_agtprc_1701m5dptw8rets9qxfwdzgw1h83",
+      "target": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/ask_2/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__sub_procedure_return__agtprc_1701m5dptw8rets9qxfwdzgw1h83/ret1": {
+      "source": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_1/sub_procedure_1/override_agent_1",
+      "target": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_1/say_2/say_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "expression",
+        "expression": {
+          "type": "boolean_literal",
+          "value": false
+        }
+      }
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/2": {
+      "source": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_1/say_2/say_1",
+      "target": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_1/system_tool_3/end_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/3": {
+      "source": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/ask_2/override_agent_1",
+      "target": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_1/sub_procedure_1/override_agent_1",
+      "forward_condition": {
+        "label": "The prospect agreed to a meeting or a call with th...",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask in one short question whether they would like a short meeting with our sales team to prepare the pricing for them. Never mention any number, range or discount.\"\n\nAND\n\nThe end user has given an appropriate response\n\nAND\n\nThe prospect agreed to a meeting or a call with the sales team."
+      }
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/4": {
+      "source": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/ask_2/override_agent_1",
+      "target": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_2/tell_1/say_1",
+      "forward_condition": {
+        "label": "The prospect did not agree to a meeting, declined,...",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask in one short question whether they would like a short meeting with our sales team to prepare the pricing for them. Never mention any number, range or discount.\"\n\nAND\n\nThe end user has given an appropriate response\n\nAND\n\nThe prospect did not agree to a meeting, declined, or wants to continue the conversation first."
+      }
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/5": {
+      "source": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_2/tell_1/say_1",
+      "target": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/end_procedure_4/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/6": {
+      "source": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/ask_2/override_agent_1",
+      "target": "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/end_procedure_4/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask in one short question whether they would like a short meeting with our sales team to prepare the pricing for them. Never mention any number, range or discount.\"\n\nAND\n\nThe end user has given an appropriate response\n\nAND\n\nNone of the following conditions are true:\n(1) The prospect agreed to a meeting or a call with the sales team.\n(2) The prospect did not agree to a meeting, declined, or wants to continue the conversation first."
+      }
+    },
+    "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/e/1": {
+      "source": "__xi_procedure__procedure_entry_agtprc_2401m5dptvszekfs31q88jz3j4a8",
+      "target": "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/sub_procedure_2/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__sub_procedure_return__agtprc_2401m5dptvszekfs31q88jz3j4a8/ret1": {
+      "source": "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/sub_procedure_2/override_agent_1",
+      "target": "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/say_3/say_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "expression",
+        "expression": {
+          "type": "boolean_literal",
+          "value": false
+        }
+      }
+    },
+    "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/e/2": {
+      "source": "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/say_3/say_1",
+      "target": "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/system_tool_4/end_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_2801m5dpty6be0v8qftd52htwb84/e/1": {
+      "source": "__xi_procedure__procedure_entry_agtprc_2801m5dpty6be0v8qftd52htwb84",
+      "target": "__xi_procedure__agtprc_2801m5dpty6be0v8qftd52htwb84/tell_2/say_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_2801m5dpty6be0v8qftd52htwb84/e/2": {
+      "source": "__xi_procedure__agtprc_2801m5dpty6be0v8qftd52htwb84/tell_2/say_1",
+      "target": "__xi_procedure__agtprc_2801m5dpty6be0v8qftd52htwb84/end_procedure_3/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_4501m5dptyn8en1v0kp29n9rdr0b/e/1": {
+      "source": "__xi_procedure__procedure_entry_agtprc_4501m5dptyn8en1v0kp29n9rdr0b",
+      "target": "__xi_procedure__agtprc_4501m5dptyn8en1v0kp29n9rdr0b/say_2/say_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask in one short question what day and time would be better for a callback. If they don't want to give one, accept that.\"\n\nAND\n\nThe end user has given an appropriate response"
+      }
+    },
+    "__xi_procedure__agtprc_4501m5dptyn8en1v0kp29n9rdr0b/e/2": {
+      "source": "__xi_procedure__agtprc_4501m5dptyn8en1v0kp29n9rdr0b/say_2/say_1",
+      "target": "__xi_procedure__agtprc_4501m5dptyn8en1v0kp29n9rdr0b/system_tool_3/end_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_5801m5dptxgzewptjy1cwp22vb2d/e/1": {
+      "source": "__xi_procedure__procedure_entry_agtprc_5801m5dptxgzewptjy1cwp22vb2d",
+      "target": "__xi_procedure__agtprc_5801m5dptxgzewptjy1cwp22vb2d/tell_2/say_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_5801m5dptxgzewptjy1cwp22vb2d/e/2": {
+      "source": "__xi_procedure__agtprc_5801m5dptxgzewptjy1cwp22vb2d/tell_2/say_1",
+      "target": "__xi_procedure__agtprc_5801m5dptxgzewptjy1cwp22vb2d/end_procedure_3/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_8501m5dptv0yex8teh6z17wnpy01/e/1": {
+      "source": "__xi_procedure__procedure_entry_agtprc_8501m5dptv0yex8teh6z17wnpy01",
+      "target": "__xi_procedure__agtprc_8501m5dptv0yex8teh6z17wnpy01/system_tool_2/end_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/1": {
+      "source": "__xi_procedure__procedure_entry_agtprc_8601m5dptwzdfnp9ve489d1gzynw",
+      "target": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/ask_2/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__sub_procedure_return__agtprc_8601m5dptwzdfnp9ve489d1gzynw/ret1": {
+      "source": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_1/sub_procedure_1/override_agent_1",
+      "target": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_1/say_2/say_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "expression",
+        "expression": {
+          "type": "boolean_literal",
+          "value": false
+        }
+      }
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/2": {
+      "source": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_1/say_2/say_1",
+      "target": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_1/system_tool_3/end_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/3": {
+      "source": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/ask_2/override_agent_1",
+      "target": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_1/sub_procedure_1/override_agent_1",
+      "forward_condition": {
+        "label": "The prospect agreed to a demo.",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask in one short question whether a short demo using one of their own projects would help instead.\"\n\nAND\n\nThe end user has given an appropriate response\n\nAND\n\nThe prospect agreed to a demo."
+      }
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/4": {
+      "source": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/ask_2/override_agent_1",
+      "target": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_2/tell_1/say_1",
+      "forward_condition": {
+        "label": "The prospect did not agree to a demo or wants to c...",
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask in one short question whether a short demo using one of their own projects would help instead.\"\n\nAND\n\nThe end user has given an appropriate response\n\nAND\n\nThe prospect did not agree to a demo or wants to continue the conversation first."
+      }
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/5": {
+      "source": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_2/tell_1/say_1",
+      "target": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/end_procedure_4/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "unconditional"
+      }
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/6": {
+      "source": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/ask_2/override_agent_1",
+      "target": "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/end_procedure_4/override_agent_1",
+      "forward_condition": {
+        "exit_slot": {
+          "type": "any"
+        },
+        "type": "llm",
+        "condition": "The following goal has been achieved by the agent: \"Ask the user: Ask in one short question whether a short demo using one of their own projects would help instead.\"\n\nAND\n\nThe end user has given an appropriate response\n\nAND\n\nNone of the following conditions are true:\n(1) The prospect agreed to a demo.\n(2) The prospect did not agree to a demo or wants to continue the conversation first."
+      }
+    }
+  },
+  "nodes": {
+    "close": {
+      "type": "override_agent",
+      "position": {
+        "x": 2100,
+        "y": 0
+      },
+      "edge_order": [],
+      "conversation_config": {
+        "agent": {
+          "prompt": {
+            "built_in_tools": {}
+          }
+        }
+      },
+      "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): CALL_SUMMARY then CALL_COMPLETED.\nObjective: in ONE sentence summarise the agreed next step (or that there is none), thank the prospect by name, say goodbye, then call the end_call tool.\nNot allowed: new questions, re-pitching, or any attempt to change their decision.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- تمام، فريقنا هيكلم حضرتك الخميس بعد الضهر. شكراً جداً لوقت حضرتك، مع السلامة.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Call summary & close",
+      "entry_behavior": "generate_immediately"
+    },
+    "discovery": {
+      "type": "override_agent",
+      "position": {
+        "x": 600,
+        "y": 0
+      },
+      "edge_order": [
+        "discovery_to_dnc",
+        "discovery_to_presentation",
+        "discovery_to_next_step",
+        "discovery_to_follow_up",
+        "discovery_to_close"
+      ],
+      "conversation_config": {
+        "agent": {
+          "prompt": {
+            "built_in_tools": {}
+          }
+        }
+      },
+      "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): DISCOVERY.\nObjective: understand (1) how the company handles real estate leads today and (2) its main sales challenge. These two are REQUIRED. Optional, only if natural: company name, the prospect's role, sales team size, approximate monthly lead volume, CRM or Google Sheets in use.\nRules: ONE question per turn. Never repeat a question already answered; acknowledge what they said. Ask at most 4 questions in total. Do not ask for confidential figures; accept \"I'd rather not say\".\nInterruption rule: if they ask a short relevant question, answer it in one or two sentences from the knowledge base, then return to the next discovery question.\nNot allowed: pitching the full solution yet, inventing what other companies do.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- حضرتك بتتعاملوا مع الليدز اللي بتيجي لكم إزاي دلوقتي؟\n- فريق المبيعات بيكلم العملاء الجداد بنفسه؟\n- إيه أكتر حاجة بتتعبكم: الوصول للعميل، ولا تقييمه، ولا المتابعة؟\n- بتستخدموا CRM ولا جوجل شيت عشان تتابعوا العملاء؟",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Discovery",
+      "entry_behavior": "auto"
+    },
+    "dnc": {
+      "type": "override_agent",
+      "position": {
+        "x": 2400,
+        "y": 400
+      },
+      "edge_order": [],
+      "conversation_config": {
+        "agent": {
+          "prompt": {
+            "built_in_tools": {}
+          }
+        }
+      },
+      "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): DO_NOT_CALL (terminal).\nSay exactly one sentence in the prospect's language, then call end_call immediately. No questions, no apology for the product, no attempt to keep them.\nEgyptian Arabic: \"تمام، هسجّل إن محدش يتصل بحضرتك تاني. آسفة على الإزعاج، ويومك سعيد.\"\nEnglish: \"Understood, I'll make sure we don't call you again. Sorry for the interruption, have a good day.\"",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Do not call",
+      "entry_behavior": "generate_immediately"
+    },
+    "follow_up": {
+      "type": "override_agent",
+      "position": {
+        "x": 1800,
+        "y": 0
+      },
+      "edge_order": [
+        "follow_up_to_dnc",
+        "follow_up_to_close"
+      ],
+      "conversation_config": {
+        "agent": {
+          "prompt": {
+            "built_in_tools": {}
+          }
+        }
+      },
+      "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): FOLLOW_UP_CAPTURE.\nObjective: capture what is needed for the agreed follow-up: preferred day and time window, then preferred contact method (phone, WhatsApp or email). If they asked for a person, confirm the sales team will call them.\nRules: one question at a time. Repeat the details back in one sentence. Say the sales team will contact them to confirm. Never say a meeting or demo is booked, and never say anything has been sent.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- إمتى يكون مناسب لحضرتك؟ الصبح ولا بعد الضهر؟\n- تحب نتواصل مع حضرتك على التليفون ولا واتساب؟\n- تمام، فريق المبيعات هيتواصل مع حضرتك يوم الخميس بعد الضهر عشان يأكد الميعاد.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Follow-up capture",
+      "entry_behavior": "auto"
+    },
+    "next_step": {
+      "type": "override_agent",
+      "position": {
+        "x": 1500,
+        "y": 0
+      },
+      "edge_order": [
+        "next_step_to_dnc",
+        "next_step_to_follow_up",
+        "next_step_to_close"
+      ],
+      "conversation_config": {
+        "agent": {
+          "prompt": {
+            "built_in_tools": {}
+          }
+        }
+      },
+      "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): NEXT_STEP_SELECTION.\nObjective: offer ONE appropriate next step and let the prospect choose. Options: a short product demo, a meeting with our sales team (including their decision maker), a callback from the sales team, information sent to them, or a later call.\nRules: one offer at a time; if declined, you may offer one alternative, then accept the answer. Calendar booking is NOT available: never say anything is booked or confirmed.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- تحب نرتب ديمو قصير تشوف فيه الموظف الذكي شغال على مشروع من مشاريعكم؟\n- ولا تفضّل حد من فريقنا يكلم حضرتك ويشرح التفاصيل؟",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Next step selection",
+      "entry_behavior": "auto"
+    },
+    "objection": {
+      "type": "override_agent",
+      "position": {
+        "x": 1200,
+        "y": 200
+      },
+      "edge_order": [
+        "objection_to_dnc",
+        "objection_to_next_step",
+        "objection_to_follow_up",
+        "objection_to_close",
+        "presentation_to_objection"
+      ],
+      "conversation_config": {
+        "agent": {
+          "prompt": {
+            "built_in_tools": {}
+          }
+        }
+      },
+      "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): OBJECTION_HANDLING.\nObjective: identify the prospect's concern, match it to the objection registry in the knowledge base (document \"05 - Objection Registry\"), and use THAT approved strategy, including any required disclosure. Then ask its permitted follow-up question.\nRules: if several concerns come together, handle the most important first (a request for a person, then privacy, then pricing, then the rest), one at a time. Never repeat the same pitch. If the same concern comes back a second time, offer a human follow-up instead of arguing. If the answer is not in the knowledge base, say you don't have that confirmed and offer the sales team.\nPricing: never give a number or range; use the approved pricing answer.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- فاهمة حضرتك تماماً.\n- بصراحة مش معايا رقم مؤكد أقوله لحضرتك دلوقتي، فريق المبيعات يقدر يجهز ده بعد ما يفهم احتياجكم.",
+      "additional_knowledge_base": [
+        {
+          "type": "text",
+          "name": "05 - Objection Registry",
+          "id": "79t6UeweAfwe0hvAwLI4",
+          "usage_mode": "auto"
+        }
+      ],
+      "additional_tool_ids": [],
+      "label": "Objection handling",
+      "entry_behavior": "auto"
+    },
+    "permission": {
+      "type": "override_agent",
+      "position": {
+        "x": 300,
+        "y": 0
+      },
+      "edge_order": [
+        "permission_to_dnc",
+        "permission_to_discovery",
+        "permission_to_follow_up",
+        "permission_to_close"
+      ],
+      "conversation_config": {
+        "agent": {
+          "prompt": {
+            "built_in_tools": {}
+          }
+        }
+      },
+      "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): PERMISSION_CHECK.\nObjective: get a clear answer on whether now is a good time. You already introduced yourself as an AI assistant in the first message.\nAllowed: answer \"who are you / why are you calling\" in one sentence; confirm you are an AI if asked; ask for a better callback time if busy.\nNot allowed: any product pitch or discovery question before permission.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- تمام، مش هطول على حضرتك.\n- ولا يهمك، إمتى يكون وقت أنسب أكلم حضرتك فيه؟",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Permission check",
+      "entry_behavior": "wait_for_user"
+    },
+    "presentation": {
+      "type": "override_agent",
+      "position": {
+        "x": 900,
+        "y": 0
+      },
+      "edge_order": [
+        "presentation_to_dnc",
+        "presentation_to_objection",
+        "presentation_to_next_step",
+        "presentation_to_follow_up",
+        "presentation_to_close"
+      ],
+      "conversation_config": {
+        "agent": {
+          "prompt": {
+            "built_in_tools": {}
+          }
+        }
+      },
+      "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): SOLUTION_PRESENTATION.\nObjective: explain the AI Sales Employee in terms of what the prospect told you. Connect at most two benefits to their specific challenge. Keep it to 2-4 short sentences, then ask one question to check relevance.\nUse only CURRENT capabilities from the knowledge base as available today. If you mention CRM/Google Sheets, email, WhatsApp, calendar booking or live transfer, you MUST say they are planned, not available yet.\nMake clear it supports their human sales team; it does not replace them.\nNot allowed: prices, guaranteed results, conversion rates, savings, 24/7 claims, customer names or case studies.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- بناءً على اللي حضرتك قلته، الموظف الذكي بيعمل أول مكالمة مع العميل، يجاوب على الأسئلة الأساسية من معلومات مشاريعكم، ويعرف مين جاد، ويسلّمه لفريق حضرتك.\n- كده فريقكم يركز وقته على العملاء الجادين والإغلاق.\n- تفتكر ده ممكن يفرق معاكم؟",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Solution presentation",
+      "entry_behavior": "auto"
+    },
+    "start_node": {
+      "type": "start",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "start_to_permission"
+      ]
+    },
+    "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/ask_2/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/e/2"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure. Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nFollow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nAsk the user: Ask, in one short question, whether they prefer to be contacted by phone, WhatsApp or email. If they have no preference, accept that and move on.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Ask: Ask, in one short question, whether they prefer to...",
+      "entry_behavior": "generate_immediately"
+    },
+    "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/tell_3/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/e/3"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Tell: In one sentence, repeat back the day/time and cont...",
+      "message": {
+        "type": "prompt",
+        "prompt": "Follow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nTell the user: In one sentence, repeat back the day/time and contact method they gave, and say our sales team will contact them to confirm. Never say that anything is booked, scheduled, confirmed or already sent."
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/end_procedure_4/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure. Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nIMPORTANT: Remain silent. Do not speak or send any message to the user.\n\nThe procedure is complete. Call the end_procedure tool with procedure_id \"agtprc_0401m5dpqs04e61be40h79m5wzcz\" to end the procedure.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "End Procedure",
+      "entry_behavior": "auto",
+      "forced_tool_name": "end_procedure"
+    },
+    "__xi_procedure__procedure_entry_agtprc_0401m5dpqs04e61be40h79m5wzcz": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_0401m5dpqs04e61be40h79m5wzcz/e/1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure. Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nFollow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nAsk the user: Ask, in one short question, which day and time window suits them for our sales team to contact them (for example morning or afternoon). If they decline to give a time, accept that and move on.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Ask: Ask, in one short question, which day and time win...",
+      "entry_behavior": "generate_immediately"
+    },
+    "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/say_2/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/e/2"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: تمام، فريق المبيعات هيبعت التفاصيل لحضرتك.",
+      "message": {
+        "type": "literal",
+        "text": "تمام، فريق المبيعات هيبعت التفاصيل لحضرتك.",
+        "text_translations": {
+          "en": {
+            "value": "Great, our sales team will send you the details."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/tell_3/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/e/3"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Tell: Continue the conversation where it was, or thank t...",
+      "message": {
+        "type": "prompt",
+        "prompt": "Follow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nTell the user: Continue the conversation where it was, or thank them and close politely if they want to end. Never say the information has already been sent."
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/end_procedure_4/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks to be sent details, a brochure or more information about the service.\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nIMPORTANT: Remain silent. Do not speak or send any message to the user.\n\nThe procedure is complete. Call the end_procedure tool with procedure_id \"agtprc_1101m5dptz35fg2regd0w0w24rg5\" to end the procedure.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "End Procedure",
+      "entry_behavior": "auto",
+      "forced_tool_name": "end_procedure"
+    },
+    "__xi_procedure__procedure_entry_agtprc_1101m5dptz35fg2regd0w0w24rg5": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_1101m5dptz35fg2regd0w0w24rg5/e/1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks to be sent details, a brochure or more information about the service.\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nFollow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nAsk the user: Ask in one short question whether they prefer to receive it by WhatsApp or email.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Ask: Ask in one short question whether they prefer to r...",
+      "entry_behavior": "generate_immediately"
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/ask_2/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/3",
+        "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/4",
+        "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/6"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks about the price, cost, fees, packages, contract terms or discounts of the AI Sales Employee (e.g. \"بكام\", \"التكلفة كام\", \"how much does it cost\").\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nFollow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nAsk the user: Ask in one short question whether they would like a short meeting with our sales team to prepare the pricing for them. Never mention any number, range or discount.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Ask: Ask in one short question whether they would like ...",
+      "entry_behavior": "generate_immediately"
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_1/sub_procedure_1/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__sub_procedure_return__agtprc_1701m5dptw8rets9qxfwdzgw1h83/ret1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks about the price, cost, fees, packages, contract terms or discounts of the AI Sales Employee (e.g. \"بكام\", \"التكلفة كام\", \"how much does it cost\").\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nIMPORTANT: Remain silent. Do not speak or send any message to the user.\n\nCall the start_procedure tool with procedure_id \"agtprc_0401m5dpqs04e61be40h79m5wzcz\" now.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Call sub-procedure agtprc_0401m5dpqs04e61be40h79m5wzcz",
+      "entry_behavior": "generate_immediately",
+      "forced_tool_name": "start_procedure"
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_1/say_2/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/2"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: شكراً جداً لوقت حضرتك، مع السلامة.",
+      "message": {
+        "type": "literal",
+        "text": "شكراً جداً لوقت حضرتك، مع السلامة.",
+        "text_translations": {
+          "en": {
+            "value": "Thank you very much for your time. Goodbye."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_1/system_tool_3/end_1": {
+      "type": "end",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "return_when_nested": false,
+      "outcome": "success"
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/branch_3/arm_2/tell_1/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/5"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Tell: Acknowledge briefly in one sentence without pressu...",
+      "message": {
+        "type": "prompt",
+        "prompt": "Follow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nTell the user: Acknowledge briefly in one sentence without pressure, then continue the conversation where it was. Do not mention pricing again unless they ask."
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/end_procedure_4/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks about the price, cost, fees, packages, contract terms or discounts of the AI Sales Employee (e.g. \"بكام\", \"التكلفة كام\", \"how much does it cost\").\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nIMPORTANT: Remain silent. Do not speak or send any message to the user.\n\nThe procedure is complete. Call the end_procedure tool with procedure_id \"agtprc_1701m5dptw8rets9qxfwdzgw1h83\" to end the procedure.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "End Procedure",
+      "entry_behavior": "auto",
+      "forced_tool_name": "end_procedure"
+    },
+    "__xi_procedure__procedure_entry_agtprc_1701m5dptw8rets9qxfwdzgw1h83": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_1701m5dptw8rets9qxfwdzgw1h83/e/1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: التكلفة بتختلف حسب احتياج كل شركة، وفريق المبيعات ...",
+      "message": {
+        "type": "literal",
+        "text": "التكلفة بتختلف حسب احتياج كل شركة، وفريق المبيعات بيجهّز عرض مخصوص بعد ما يفهم احتياجكم، فمش هقدر أقول رقم دلوقتي.",
+        "text_translations": {
+          "en": {
+            "value": "The cost depends on each company's needs, and our sales team prepares a tailored proposal once they understand yours, so I can't give a number right now."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/sub_procedure_2/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__sub_procedure_return__agtprc_2401m5dptvszekfs31q88jz3j4a8/ret1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks to speak with a real person or someone from the sales team instead of the AI (e.g. \"عايز أكلم حد من الفريق\", \"مش عايز أكلم روبوت\", \"can I talk to a person\").\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nIMPORTANT: Remain silent. Do not speak or send any message to the user.\n\nCall the start_procedure tool with procedure_id \"agtprc_0401m5dpqs04e61be40h79m5wzcz\" now.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Call sub-procedure agtprc_0401m5dpqs04e61be40h79m5wzcz",
+      "entry_behavior": "generate_immediately",
+      "forced_tool_name": "start_procedure"
+    },
+    "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/say_3/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/e/2"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: شكراً جداً لوقت حضرتك، مع السلامة.",
+      "message": {
+        "type": "literal",
+        "text": "شكراً جداً لوقت حضرتك، مع السلامة.",
+        "text_translations": {
+          "en": {
+            "value": "Thank you very much for your time. Goodbye."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/system_tool_4/end_1": {
+      "type": "end",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "return_when_nested": false,
+      "outcome": "success"
+    },
+    "__xi_procedure__procedure_entry_agtprc_2401m5dptvszekfs31q88jz3j4a8": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_2401m5dptvszekfs31q88jz3j4a8/e/1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: أكيد، هخلّي حد من فريق المبيعات يكلّم حضرتك بنفسه.",
+      "message": {
+        "type": "literal",
+        "text": "أكيد، هخلّي حد من فريق المبيعات يكلّم حضرتك بنفسه.",
+        "text_translations": {
+          "en": {
+            "value": "Of course, I'll have someone from our sales team call you personally."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_2801m5dpty6be0v8qftd52htwb84/tell_2/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_2801m5dpty6be0v8qftd52htwb84/e/2"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Tell: Continue the conversation where it was, in one sho...",
+      "message": {
+        "type": "prompt",
+        "prompt": "Follow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nTell the user: Continue the conversation where it was, in one short sentence."
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_2801m5dpty6be0v8qftd52htwb84/end_procedure_3/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks whether they are talking to a robot, an AI, a recording or a real person.\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nIMPORTANT: Remain silent. Do not speak or send any message to the user.\n\nThe procedure is complete. Call the end_procedure tool with procedure_id \"agtprc_2801m5dpty6be0v8qftd52htwb84\" to end the procedure.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "End Procedure",
+      "entry_behavior": "auto",
+      "forced_tool_name": "end_procedure"
+    },
+    "__xi_procedure__procedure_entry_agtprc_2801m5dpty6be0v8qftd52htwb84": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_2801m5dpty6be0v8qftd52htwb84/e/1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: أيوه، أنا مساعدة مبيعات بالذكاء الاصطناعي، ولو تحب...",
+      "message": {
+        "type": "literal",
+        "text": "أيوه، أنا مساعدة مبيعات بالذكاء الاصطناعي، ولو تحبوا تتكلموا مع حد من الفريق في أي وقت، أقدر أرتّب ده.",
+        "text_translations": {
+          "en": {
+            "value": "Yes, I'm an AI sales assistant, and if at any point you'd like to speak with someone from our team, I can arrange that."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_4501m5dptyn8en1v0kp29n9rdr0b/say_2/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_4501m5dptyn8en1v0kp29n9rdr0b/e/2"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: تمام، فريقنا هيتواصل مع حضرتك في الوقت ده. شكراً، ...",
+      "message": {
+        "type": "literal",
+        "text": "تمام، فريقنا هيتواصل مع حضرتك في الوقت ده. شكراً، مع السلامة.",
+        "text_translations": {
+          "en": {
+            "value": "Great, our team will reach out at that time. Thank you, goodbye."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_4501m5dptyn8en1v0kp29n9rdr0b/system_tool_3/end_1": {
+      "type": "end",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "return_when_nested": false,
+      "outcome": "success"
+    },
+    "__xi_procedure__procedure_entry_agtprc_4501m5dptyn8en1v0kp29n9rdr0b": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_4501m5dptyn8en1v0kp29n9rdr0b/e/1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect says they are busy right now or cannot talk, and is open to a call at another time.\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nFollow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nAsk the user: Ask in one short question what day and time would be better for a callback. If they don't want to give one, accept that.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Ask: Ask in one short question what day and time would ...",
+      "entry_behavior": "generate_immediately"
+    },
+    "__xi_procedure__agtprc_5801m5dptxgzewptjy1cwp22vb2d/tell_2/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_5801m5dptxgzewptjy1cwp22vb2d/e/2"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Tell: If they ask for technical specifics beyond the kno...",
+      "message": {
+        "type": "prompt",
+        "prompt": "Follow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nTell the user: If they ask for technical specifics beyond the knowledge base, say our team can cover them in a meeting. Otherwise continue the conversation where it was."
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_5801m5dptxgzewptjy1cwp22vb2d/end_procedure_3/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks whether the AI Sales Employee connects to their CRM or Google Sheets, sends WhatsApp or email, books meetings in a calendar, or transfers calls live.\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nIMPORTANT: Remain silent. Do not speak or send any message to the user.\n\nThe procedure is complete. Call the end_procedure tool with procedure_id \"agtprc_5801m5dptxgzewptjy1cwp22vb2d\" to end the procedure.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "End Procedure",
+      "entry_behavior": "auto",
+      "forced_tool_name": "end_procedure"
+    },
+    "__xi_procedure__procedure_entry_agtprc_5801m5dptxgzewptjy1cwp22vb2d": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_5801m5dptxgzewptjy1cwp22vb2d/e/1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: الربط مع الـ CRM وجوجل شيت والواتساب والإيميل وحجز...",
+      "message": {
+        "type": "literal",
+        "text": "الربط مع الـ CRM وجوجل شيت والواتساب والإيميل وحجز المواعيد لسه قيد التطوير ومش متاح النهارده. النهارده كل مكالمة بتطلع بنتيجة وملخص منظم بيتسلّم لفريقكم.",
+        "text_translations": {
+          "en": {
+            "value": "Integrations with CRM, Google Sheets, WhatsApp, email and calendar booking are still in development and not available today. Today, every call produces a structured outcome and summary for your team."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_8501m5dptv0yex8teh6z17wnpy01/system_tool_2/end_1": {
+      "type": "end",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "return_when_nested": false,
+      "outcome": "success"
+    },
+    "__xi_procedure__procedure_entry_agtprc_8501m5dptv0yex8teh6z17wnpy01": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_8501m5dptv0yex8teh6z17wnpy01/e/1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: تمام، هسجّل إن محدش يتصل بحضرتك تاني. آسفة على الإ...",
+      "message": {
+        "type": "literal",
+        "text": "تمام، هسجّل إن محدش يتصل بحضرتك تاني. آسفة على الإزعاج، ويومك سعيد.",
+        "text_translations": {
+          "en": {
+            "value": "Understood, I'll make sure we don't call you again. Sorry for the interruption, have a good day."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/ask_2/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/3",
+        "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/4",
+        "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/6"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks which companies use the service, for case studies, testimonials, references, performance statistics or guaranteed results (e.g. \"مين اشتغل معاكم\", \"عندكم أرقام\", \"case study\").\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nFollow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nAsk the user: Ask in one short question whether a short demo using one of their own projects would help instead.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Ask: Ask in one short question whether a short demo usi...",
+      "entry_behavior": "generate_immediately"
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_1/sub_procedure_1/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__sub_procedure_return__agtprc_8601m5dptwzdfnp9ve489d1gzynw/ret1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks which companies use the service, for case studies, testimonials, references, performance statistics or guaranteed results (e.g. \"مين اشتغل معاكم\", \"عندكم أرقام\", \"case study\").\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nIMPORTANT: Remain silent. Do not speak or send any message to the user.\n\nCall the start_procedure tool with procedure_id \"agtprc_0401m5dpqs04e61be40h79m5wzcz\" now.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Call sub-procedure agtprc_0401m5dpqs04e61be40h79m5wzcz",
+      "entry_behavior": "generate_immediately",
+      "forced_tool_name": "start_procedure"
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_1/say_2/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/2"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: شكراً جداً لوقت حضرتك، مع السلامة.",
+      "message": {
+        "type": "literal",
+        "text": "شكراً جداً لوقت حضرتك، مع السلامة.",
+        "text_translations": {
+          "en": {
+            "value": "Thank you very much for your time. Goodbye."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_1/system_tool_3/end_1": {
+      "type": "end",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "return_when_nested": false,
+      "outcome": "success"
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/branch_3/arm_2/tell_1/say_1": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/5"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Tell: Acknowledge briefly in one sentence, then continue...",
+      "message": {
+        "type": "prompt",
+        "prompt": "Follow the instructions below verbatim. Do not ask any follow-up questions. Do not do anything else:\n\nTell the user: Acknowledge briefly in one sentence, then continue the conversation where it was."
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    },
+    "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/end_procedure_4/override_agent_1": {
+      "type": "override_agent",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [],
+      "conversation_config": {},
+      "additional_prompt": "<current-active-structured-procedure>\nYou are in an active structured procedure that was triggered by: \"The prospect asks which companies use the service, for case studies, testimonials, references, performance statistics or guaranteed results (e.g. \"مين اشتغل معاكم\", \"عندكم أرقام\", \"case study\").\". Follow the step instructions below exactly.\n</current-active-structured-procedure>\n\nIMPORTANT: Remain silent. Do not speak or send any message to the user.\n\nThe procedure is complete. Call the end_procedure tool with procedure_id \"agtprc_8601m5dptwzdfnp9ve489d1gzynw\" to end the procedure.",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "End Procedure",
+      "entry_behavior": "auto",
+      "forced_tool_name": "end_procedure"
+    },
+    "__xi_procedure__procedure_entry_agtprc_8601m5dptwzdfnp9ve489d1gzynw": {
+      "type": "say",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "edge_order": [
+        "__xi_procedure__agtprc_8601m5dptwzdfnp9ve489d1gzynw/e/1"
+      ],
+      "conversation_config": {},
+      "additional_prompt": "",
+      "additional_knowledge_base": [],
+      "additional_tool_ids": [],
+      "label": "Say: بصراحة مش معايا أسماء عملاء أو دراسات حالة أقدر أش...",
+      "message": {
+        "type": "literal",
+        "text": "بصراحة مش معايا أسماء عملاء أو دراسات حالة أقدر أشاركها دلوقتي، ومش هقول أرقام مش مؤكدة.",
+        "text_translations": {
+          "en": {
+            "value": "Honestly, I don't have client names or case studies I can share right now, and I won't quote figures that aren't confirmed."
+          }
+        }
+      },
+      "wait_for_speech_completion": false,
+      "wait_for_user_response": false
+    }
+  },
+  "subgraphs": {},
+  "prevent_subagent_loops": true
+}

@@ -1,0 +1,10 @@
+{
+  "procedure_id": "agtprc_2801m5dpty6be0v8qftd52htwb84",
+  "version_id": "agtprcv_6501m5dq0z0xewdr7r68aqwx774h",
+  "name": "Are you a robot / real person?",
+  "type": "deterministic",
+  "trigger": "The prospect asks whether they are talking to a robot, an AI, a recording or a real person.",
+  "content": "{\"steps\":[{\"type\":\"say\",\"message\":\"أيوه، أنا مساعدة مبيعات بالذكاء الاصطناعي، ولو تحبوا تتكلموا مع حد من الفريق في أي وقت، أقدر أرتّب ده.\",\"message_translations\":{\"en\":{\"value\":\"Yes, I'm an AI sales assistant, and if at any point you'd like to speak with someone from our team, I can arrange that.\"}}},{\"type\":\"tell\",\"instruction\":\"Continue the conversation where it was, in one short sentence.\"}]}",
+  "guardrails": [],
+  "referenced_procedure_ids": []
+}

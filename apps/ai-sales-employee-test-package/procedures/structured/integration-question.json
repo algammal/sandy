@@ -1,0 +1,10 @@
+{
+  "procedure_id": "agtprc_5801m5dptxgzewptjy1cwp22vb2d",
+  "version_id": "agtprcv_0301m5dq0z0sf8kvw47rnyf16c81",
+  "name": "Integration question (CRM, Sheets, WhatsApp, email, booking, transfer)",
+  "type": "deterministic",
+  "trigger": "The prospect asks whether the AI Sales Employee connects to their CRM or Google Sheets, sends WhatsApp or email, books meetings in a calendar, or transfers calls live.",
+  "content": "{\"steps\":[{\"type\":\"say\",\"message\":\"الربط مع الـ CRM وجوجل شيت والواتساب والإيميل وحجز المواعيد لسه قيد التطوير ومش متاح النهارده. النهارده كل مكالمة بتطلع بنتيجة وملخص منظم بيتسلّم لفريقكم.\",\"message_translations\":{\"en\":{\"value\":\"Integrations with CRM, Google Sheets, WhatsApp, email and calendar booking are still in development and not available today. Today, every call produces a structured outcome and summary for your team.\"}}},{\"type\":\"tell\",\"instruction\":\"If they ask for technical specifics beyond the knowledge base, say our team can cover them in a meeting. Otherwise continue the conversation where it was.\"}]}",
+  "guardrails": [],
+  "referenced_procedure_ids": []
+}

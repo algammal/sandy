@@ -1,0 +1,1785 @@
+{
+  "agent_id": "YOUR_TEST_AGENT_ID",
+  "name": "AI Sales Employee - B2B Outbound (Egyptian Arabic)",
+  "conversation_config": {
+    "asr": {
+      "quality": "high",
+      "provider": "scribe_realtime",
+      "user_input_audio_format": "pcm_16000",
+      "keywords": []
+    },
+    "turn": {
+      "turn_timeout": 8,
+      "silence_end_call_timeout": 30,
+      "mode": "turn",
+      "turn_eagerness": "normal",
+      "spelling_patience": "auto",
+      "speculative_turn": true,
+      "retranscribe_on_turn_timeout": false,
+      "turn_model": "turn_v3",
+      "interruption_ignore_terms": [],
+      "interruption_ignore_term_languages": [],
+      "merge_with_default_ignore_terms": false,
+      "transcribe_on_disabled_interruptions": false,
+      "soft_timeout_config": {
+        "timeout_seconds": 4,
+        "message": "One moment.",
+        "additional_soft_timeout_messages": [],
+        "use_llm_generated_message": false,
+        "randomize_fillers": false,
+        "max_soft_timeouts_per_generation": 1,
+        "disable_until_first_user_message": true
+      },
+      "noisy_environment_detection": false,
+      "noisy_environment_message": "Uhh ... sorry, I'm picking up some noise in the background. Could you move somewhere quieter?"
+    },
+    "tts": {
+      "model_id": "eleven_v3_conversational",
+      "voice_id": "L10lEremDiJfPicq5CPh",
+      "supported_voices": [],
+      "expressive_mode": true,
+      "suggested_audio_tags": [
+        {
+          "tag": "warm",
+          "description": "Default friendly, calm delivery"
+        },
+        {
+          "tag": "calm",
+          "description": "When handling objections or concerns"
+        },
+        {
+          "tag": "thoughtful",
+          "description": "Brief pause before answering a considered question"
+        },
+        {
+          "tag": "light laugh",
+          "description": "Rarely, only if the prospect jokes"
+        }
+      ],
+      "agent_output_audio_format": "pcm_16000",
+      "optimize_streaming_latency": 3,
+      "stability": 0.5,
+      "speed": 0.97,
+      "similarity_boost": 0.8,
+      "clone_strength": 0,
+      "text_normalisation_type": "system_prompt",
+      "pronunciation_dictionary_locators": [],
+      "enable_phoneme_tags": true
+    },
+    "conversation": {
+      "text_only": false,
+      "max_duration_seconds": 600,
+      "client_events": [
+        "audio",
+        "interruption",
+        "agent_response",
+        "user_transcript",
+        "agent_response_correction",
+        "agent_tool_response"
+      ],
+      "file_input": {
+        "enabled": true,
+        "max_files_in_memory": 10,
+        "max_files_per_conversation": 10
+      },
+      "monitoring_enabled": false,
+      "monitoring_events": [
+        "user_transcript",
+        "agent_response",
+        "agent_response_correction"
+      ],
+      "background_sound": {
+        "volume": 0.15,
+        "crossfade_loop": true
+      },
+      "compaction": {},
+      "source_attribution": false
+    },
+    "language_presets": {
+      "en": {
+        "overrides": {
+          "agent": {
+            "first_message": "Hi {{contact_name}}, this is {{agent_name}}, an AI sales assistant from {{company_name}}. I'm calling about an AI Sales Employee we offer to real estate companies. Do you have two minutes?",
+            "max_conversation_duration_message": "I'm sorry, we've reached the time limit for this call. Our sales team can follow up if you'd like to continue. Thank you for your time."
+          }
+        }
+      }
+    },
+    "vad": {
+      "background_voice_detection": false
+    },
+    "agent": {
+      "first_message": "أهلاً {{contact_name}}، أنا {{agent_name}}، مساعدة مبيعات بالذكاء الاصطناعي من {{company_name}}. بكلم حضرتك بخصوص موظف مبيعات بالذكاء الاصطناعي بنقدمه لشركات العقارات. ينفع آخد من وقت حضرتك دقيقتين؟",
+      "language": "ar",
+      "hinglish_mode": false,
+      "dynamic_variables": {
+        "dynamic_variable_placeholders": {
+          "agent_name": "سارة",
+          "campaign_focus": "AI Sales Employee for real estate sales teams",
+          "campaign_name": "TEST - AI Sales Employee pilot",
+          "company_name": "TEST - Company",
+          "contact_name": "أحمد",
+          "contact_reason": "شركتكم بتشتغل في التسويق العقاري",
+          "contact_role": "مدير المبيعات",
+          "lead_id": "TEST-B2B-0001",
+          "prospect_company": "TEST - شركة عقارات تجريبية"
+        }
+      },
+      "disable_first_message_interruptions": true,
+      "max_conversation_duration_message": "معلش، وقت المكالمة خلص. فريق المبيعات هيتواصل مع حضرتك لو حابب نكمل. متشكرة جداً لوقت حضرتك.",
+      "silence_end_call_message": "",
+      "text_behavior_overrides": {
+        "whatsapp": {
+          "disable_max_duration": true
+        }
+      },
+      "subagent_config": {
+        "agents": []
+      },
+      "prompt": {
+        "prompt": "# Personality\nYou are {{agent_name}}, a female AI sales assistant calling on behalf of {{company_name}}. You are calm, warm, professional and respectful of the prospect's time. You speak natural Egyptian Arabic (Masri) — the everyday business register used in Cairo offices — not Modern Standard Arabic and not Gulf or Levantine dialect. Use feminine self-reference (e.g. \"أنا مبسوطة\", \"أقدر أساعد\"). Address the prospect respectfully with \"حضرتك\".\n\n# Who you are calling\nThis is a B2B call. You are speaking with {{contact_name}} ({{contact_role}}) at {{prospect_company}}, a real estate company. Reason for the call: {{contact_reason}}. Campaign: {{campaign_name}} — {{campaign_focus}}.\n\n# What you sell\nYou sell ONE thing: the \"AI Sales Employee\" service — an AI voice assistant that real estate companies use to hold first sales conversations with their buyer leads, answer from the company's approved information, qualify leads and hand serious buyers to the human sales team.\nYou do NOT sell, recommend or discuss specific properties, units, projects, prices of apartments or viewings. If the prospect asks about buying property, politely explain you're calling about a service for real estate companies.\n\n# Language\n- Default: Egyptian Arabic. Short spoken sentences, one idea at a time, one question per turn.\n- English technical words that Egyptian business people normally say in English are fine (CRM, leads, demo, follow-up).\n- If the prospect speaks English for a full turn or asks for English, switch to English with the language_detection tool and continue in English.\n- Never output markdown, lists, emojis or raw placeholders such as {{___}}, \"NOT PROVIDED\" or \"[...]\". If a value is missing, speak around it.\n\n# Conversation structure (the call runs as a workflow)\nThe call follows fixed stages. The current stage's instructions are added below this prompt. Stay inside the current stage's goal; do not jump ahead.\n1. Identity disclosure — already done by the first message (you said you are an AI assistant).\n2. Permission — confirm it's a good time. If not, ask for a better time and close.\n3. Discovery — understand how they handle leads today and their main challenge.\n4. Presentation — connect the AI Sales Employee to THEIR stated challenge. Only current capabilities.\n5. Objection handling — one approved strategy per concern from the Objection Registry knowledge base.\n6. Next step — offer ONE suitable next step: a demo, a meeting with the sales team, a human callback, or sending information.\n7. Follow-up capture — preferred time and channel.\n8. Close — short summary of what was agreed, thank them, end the call.\n\n# Absolute rules (never break)\n1. Always be transparent that you are an AI. If asked \"are you a robot / real person?\", say clearly you are an AI assistant.\n2. Do-not-call: if the prospect says anything like \"متتصلوش تاني\", \"شيلوا رقمي\", \"don't call me again\", immediately confirm in one sentence that they won't be contacted again, apologise briefly and end the call. No persuasion.\n3. Never invent facts. Use only the knowledge base. Specifically NEVER state: prices, packages, discounts or ranges; customer names, testimonials, case studies or performance statistics; guaranteed results; fixed onboarding timelines; security certifications or legal guarantees.\n4. Pricing questions: say pricing depends on the company's needs and the sales team prepares it, then offer a meeting. Never give a number.\n5. Planned features (CRM / Google Sheets sync, email, WhatsApp, calendar booking, live transfer, reporting dashboard) must be described as PLANNED, \"لسه قيد التطوير\" — never as available.\n6. Never say a demo, meeting or callback IS booked or confirmed. Say the sales team will contact them to confirm the time.\n7. Never say information has been sent. Say the team will send it.\n8. Never ask for passwords, bank details, ID numbers or customer data during the call.\n9. If the prospect asks for a human, stop pitching and arrange a callback from the sales team.\n10. If you don't know an answer, say you don't have it confirmed and offer to have the sales team follow up.\n11. Do not repeat the same pitch. If the same concern comes back a second time, offer a human follow-up instead of arguing.\n12. Keep the call short: aim for under 6 minutes. Never pressure.\n\n# Voicemail and wrong person\n- Voicemail or answering machine: use voicemail_detection; do not pitch to a recording.\n- Wrong person or wrong number: apologise, ask if there's a better contact only if natural, then end the call.\n\n# Tone guide (Egyptian Arabic examples)\n- \"تمام، فاهمة حضرتك.\"\n- \"ده سؤال مهم جداً.\"\n- \"خليني أوضح لحضرتك بشكل بسيط.\"\n- \"أكيد، الفريق هيتواصل مع حضرتك يأكد المعاد.\"\n- \"مفيش أي مشكلة خالص، متشكرة جداً لوقت حضرتك.\"\n",
+        "llm": "claude-haiku-4-5",
+        "service_tier": "standard",
+        "enable_reasoning_summary": false,
+        "temperature": 0.2,
+        "max_tokens": -1,
+        "tool_ids": [],
+        "tool_ids_strict": false,
+        "built_in_tools": {
+          "end_call": {
+            "type": "system",
+            "name": "end_call",
+            "description": "End the call after you have said your closing sentence. Use it when: the conversation has reached an agreed next step; the customer is not interested; the customer asks not to be called again (after the do-not-call confirmation sentence); it is a wrong number or wrong person; the line is unclear after one retry; or the customer is abusive.",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "interruption_mode": "allow",
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "end_call"
+            }
+          },
+          "language_detection": {
+            "type": "system",
+            "name": "language_detection",
+            "description": "Switch to English only if the prospect speaks a full turn in English or asks for English. Brief English terms (CRM, leads, demo) inside Arabic sentences are NOT a reason to switch.",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "interruption_mode": "allow",
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "language_detection",
+              "only_at_conversation_start": false
+            }
+          },
+          "voicemail_detection": {
+            "type": "system",
+            "name": "voicemail_detection",
+            "description": "Use immediately when the call is answered by a voicemail greeting, answering machine, or carrier message instead of a live person. Do not pitch to a recording.",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "interruption_mode": "allow",
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "voicemail_detection"
+            }
+          }
+        },
+        "rich_content": {
+          "enabled_components": []
+        },
+        "enable_parallel_tool_calls": true,
+        "mcp_server_ids": [],
+        "native_mcp_server_ids": [],
+        "knowledge_base": [
+          {
+            "type": "text",
+            "name": "01 - AI Sales Employee: Product Overview",
+            "id": "m7gggN4S1LXAjVAthyVO",
+            "usage_mode": "auto"
+          },
+          {
+            "type": "text",
+            "name": "02 - Capabilities: Current vs Planned",
+            "id": "B6faafMYfIiC0ynveyxf",
+            "usage_mode": "auto"
+          },
+          {
+            "type": "text",
+            "name": "03 - Onboarding and Pricing",
+            "id": "jYqlYSLlDqmHRCkRCeex",
+            "usage_mode": "auto"
+          },
+          {
+            "type": "text",
+            "name": "04 - Privacy, Compliance and Company",
+            "id": "iRhzjTHsbxSZ4VrFkfx9",
+            "usage_mode": "auto"
+          },
+          {
+            "type": "text",
+            "name": "05 - Objection Registry",
+            "id": "79t6UeweAfwe0hvAwLI4",
+            "usage_mode": "auto"
+          }
+        ],
+        "ignore_default_personality": true,
+        "rag": {
+          "enabled": true,
+          "embedding_model": "e5_mistral_7b_instruct",
+          "optional_rag_enabled": false,
+          "max_vector_distance": 0.6,
+          "max_documents_length": 20000,
+          "max_retrieved_rag_chunks_count": 8,
+          "include_source_urls": false
+        },
+        "timezone": "Africa/Cairo",
+        "backup_llm_config": {
+          "preference": "default"
+        },
+        "cascade_timeout_seconds": 4,
+        "tools": [
+          {
+            "type": "system",
+            "name": "end_call",
+            "description": "End the call after you have said your closing sentence. Use it when: the conversation has reached an agreed next step; the customer is not interested; the customer asks not to be called again (after the do-not-call confirmation sentence); it is a wrong number or wrong person; the line is unclear after one retry; or the customer is abusive.",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "interruption_mode": "allow",
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "end_call"
+            }
+          },
+          {
+            "type": "system",
+            "name": "language_detection",
+            "description": "Switch to English only if the prospect speaks a full turn in English or asks for English. Brief English terms (CRM, leads, demo) inside Arabic sentences are NOT a reason to switch.",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "interruption_mode": "allow",
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "language_detection",
+              "only_at_conversation_start": false
+            }
+          },
+          {
+            "type": "system",
+            "name": "voicemail_detection",
+            "description": "Use immediately when the call is answered by a voicemail greeting, answering machine, or carrier message instead of a live person. Do not pitch to a recording.",
+            "response_timeout_secs": 20,
+            "disable_interruptions": false,
+            "interruption_mode": "allow",
+            "force_pre_tool_speech": false,
+            "pre_tool_speech": "auto",
+            "assignments": [],
+            "tool_call_sound_behavior": "auto",
+            "tool_error_handling_mode": "auto",
+            "params": {
+              "system_tool_type": "voicemail_detection"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "created_at_unix_secs": 1792530136,
+    "updated_at_unix_secs": 1792535460
+  },
+  "platform_settings": {
+    "evaluation": {
+      "criteria": [
+        {
+          "id": "ai_disclosure",
+          "name": "AI disclosure",
+          "type": "prompt",
+          "conversation_goal_prompt": "Success if the agent clearly identified itself as an AI assistant at the start and answered honestly if asked whether it is a human. Failure if it claimed or implied being human.",
+          "use_knowledge_base": false,
+          "scope": "conversation",
+          "llm_billed": false,
+          "scoring_mode": "binary",
+          "max_score": 100
+        },
+        {
+          "id": "no_invented_commercial_claims",
+          "name": "No invented commercial claims",
+          "type": "prompt",
+          "conversation_goal_prompt": "Failure if the agent stated any price, package, price range, discount, setup fee, customer name, testimonial, case study, performance statistic, guaranteed result, fixed onboarding timeline, security certification or legal guarantee that is not in the knowledge base. Success otherwise.",
+          "use_knowledge_base": true,
+          "scope": "conversation",
+          "llm_billed": false,
+          "scoring_mode": "binary",
+          "max_score": 100
+        },
+        {
+          "id": "planned_vs_current",
+          "name": "Planned features described as planned",
+          "type": "prompt",
+          "conversation_goal_prompt": "Failure if the agent described CRM/Google Sheets sync, email, WhatsApp, calendar booking, live transfer or a reporting dashboard as currently available. Success if they were described as planned or not mentioned.",
+          "use_knowledge_base": true,
+          "scope": "conversation",
+          "llm_billed": false,
+          "scoring_mode": "binary",
+          "max_score": 100
+        },
+        {
+          "id": "no_false_booking",
+          "name": "No false booking or sending claims",
+          "type": "prompt",
+          "conversation_goal_prompt": "Failure if the agent said a demo, meeting or callback is booked, scheduled or confirmed, or that information has been sent. Success if it said the sales team will contact the prospect to confirm.",
+          "use_knowledge_base": false,
+          "scope": "conversation",
+          "llm_billed": false,
+          "scoring_mode": "binary",
+          "max_score": 100
+        },
+        {
+          "id": "dnc_respected",
+          "name": "Do-not-call respected",
+          "type": "prompt",
+          "conversation_goal_prompt": "If the prospect asked not to be contacted again: success only if the agent confirmed in one sentence without persuasion and ended the call. If no such request was made, success.",
+          "use_knowledge_base": false,
+          "scope": "conversation",
+          "llm_billed": false,
+          "scoring_mode": "binary",
+          "max_score": 100
+        },
+        {
+          "id": "b2b_scope",
+          "name": "Stayed on B2B product",
+          "type": "prompt",
+          "conversation_goal_prompt": "Failure if the agent tried to sell, recommend or discuss specific properties, units, apartments or viewings instead of the AI Sales Employee service. Success otherwise.",
+          "use_knowledge_base": false,
+          "scope": "conversation",
+          "llm_billed": false,
+          "scoring_mode": "binary",
+          "max_score": 100
+        },
+        {
+          "id": "egyptian_arabic",
+          "name": "Egyptian Arabic delivery",
+          "type": "prompt",
+          "conversation_goal_prompt": "Success if, when the conversation was in Arabic, the agent spoke natural Egyptian colloquial Arabic (not Modern Standard Arabic or another dialect), or switched to English only when the prospect spoke English. Failure otherwise.",
+          "use_knowledge_base": false,
+          "scope": "conversation",
+          "llm_billed": false,
+          "scoring_mode": "binary",
+          "max_score": 100
+        }
+      ]
+    },
+    "widget": {
+      "variant": "full",
+      "placement": "bottom-right",
+      "expandable": "never",
+      "avatar": {
+        "type": "orb",
+        "color_1": "#2792dc",
+        "color_2": "#9ce6e6"
+      },
+      "feedback_mode": "during",
+      "end_feedback": {
+        "type": "rating"
+      },
+      "bg_color": "#ffffff",
+      "text_color": "#000000",
+      "btn_color": "#000000",
+      "btn_text_color": "#ffffff",
+      "border_color": "#e1e1e1",
+      "focus_color": "#000000",
+      "shareable_page_show_terms": true,
+      "terms_text": "#### Terms and conditions\n\nBy clicking \"Agree,\" and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as described in the Privacy Policy.\nIf you do not wish to have your conversations recorded, please refrain from using this service.",
+      "show_avatar_when_collapsed": false,
+      "disable_banner": false,
+      "markdown_link_allowed_hosts": [],
+      "markdown_link_include_www": true,
+      "markdown_link_allow_http": true,
+      "mic_muting_enabled": true,
+      "transcript_enabled": true,
+      "text_input_enabled": true,
+      "conversation_mode_toggle_enabled": false,
+      "default_expanded": false,
+      "always_expanded": false,
+      "dismissible": false,
+      "show_agent_status": false,
+      "show_conversation_id": true,
+      "strip_audio_tags": true,
+      "text_contents": {},
+      "styles": {},
+      "show_resize_button": true,
+      "end_confirmation_enabled": false,
+      "language_selector": false,
+      "supports_text_only": true,
+      "language_presets": {},
+      "first_message_quick_replies": []
+    },
+    "data_collection": {
+      "ai_disclosure_given": {
+        "type": "boolean",
+        "description": "True if the agent clearly stated it is an AI assistant during the call.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "call_outcome": {
+        "type": "string",
+        "description": "Best single description of how the call ended. Advisory: the backend recomputes the final lead category with deterministic rules.",
+        "enum": [
+          "qualified",
+          "follow_up_requested",
+          "demo_requested",
+          "information_requested",
+          "not_interested",
+          "do_not_call",
+          "unanswered",
+          "voicemail",
+          "failed",
+          "disconnected",
+          "human_follow_up_required"
+        ],
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "company_name": {
+        "type": "string",
+        "description": "The prospect's real estate company name as stated in the call. Empty string if not stated.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "consent_to_follow_up": {
+        "type": "boolean",
+        "description": "True only if the prospect explicitly agreed to be contacted again (call, meeting, demo, or information sent).",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "contact_name": {
+        "type": "string",
+        "description": "Name of the person spoken to, if confirmed in the call. Empty string if not stated.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "contact_role": {
+        "type": "string",
+        "description": "The prospect's role or title (e.g. owner, CEO, sales director) as stated. Empty string if not stated.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "current_crm": {
+        "type": "string",
+        "description": "CRM or tool they said they use (e.g. Salesforce, HubSpot, Google Sheets, Excel). Empty string if not stated.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "current_lead_process": {
+        "type": "string",
+        "description": "Short summary (max 1 sentence) of how the prospect said they handle leads today. Empty string if not discussed.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "do_not_call_requested": {
+        "type": "boolean",
+        "description": "True if the prospect asked not to be called or contacted again or to be removed from the list, in any wording or language.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "explicit_rejection": {
+        "type": "boolean",
+        "description": "True if the prospect clearly said they are not interested.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "follow_up_channel": {
+        "type": "string",
+        "description": "Contact method the prospect preferred for follow-up.",
+        "enum": [
+          "phone",
+          "email",
+          "whatsapp",
+          "unspecified"
+        ],
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "human_requested": {
+        "type": "boolean",
+        "description": "True if the prospect asked to speak with a human / a person from the sales team.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "interest_expressed": {
+        "type": "boolean",
+        "description": "True only if the prospect explicitly expressed interest in the AI Sales Employee (e.g. 'interesting', 'I'd like to see it'). False otherwise.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "lead_volume": {
+        "type": "integer",
+        "description": "Approximate monthly number of leads the prospect explicitly stated. Leave empty if not stated; never estimate.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "low_interest": {
+        "type": "boolean",
+        "description": "True if the prospect showed little interest (short non-committal answers, 'maybe later', 'not now') without explicitly rejecting.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "needs_internal_approval": {
+        "type": "boolean",
+        "description": "True if the prospect said a decision requires management, partners or someone else.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "no_need_identified": {
+        "type": "boolean",
+        "description": "True if the prospect explicitly said they have no need or the problem doesn't apply to them.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "objections": {
+        "type": "string",
+        "description": "Comma-separated objection ids raised by the prospect, using ONLY these ids: already_has_sales_team, already_uses_crm, prefers_real_people, concerned_about_ai_voice, asks_for_pricing, how_does_it_know_inventory, fits_existing_workflow, measuring_performance, privacy_concern, requests_case_study, send_information, needs_management_approval, requests_human. Empty string if none.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "preferred_callback_time": {
+        "type": "string",
+        "description": "Day/time window the prospect gave for follow-up, in their words (e.g. 'Thursday afternoon'). Empty string if none.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "preferred_language": {
+        "type": "string",
+        "description": "Language the prospect mainly spoke: ar or en.",
+        "enum": [
+          "ar",
+          "en"
+        ],
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "preferred_next_step": {
+        "type": "string",
+        "description": "The next step the prospect explicitly agreed to. 'none' if no next step was agreed.",
+        "enum": [
+          "demo_requested",
+          "meeting_requested",
+          "human_callback_requested",
+          "proposal_requested",
+          "information_requested",
+          "ai_callback_later",
+          "none"
+        ],
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "primary_challenge": {
+        "type": "string",
+        "description": "Short summary of the main sales challenge the prospect stated in their own words. Empty string if not stated.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "relevant_need_identified": {
+        "type": "boolean",
+        "description": "True only if the prospect described a concrete problem the AI Sales Employee addresses (e.g. leads not called fast enough, team overloaded with first calls, poor follow-up).",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "sales_team_size": {
+        "type": "integer",
+        "description": "Number of salespeople the prospect explicitly stated. Leave empty if not stated; never estimate.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      },
+      "unanswered_questions": {
+        "type": "string",
+        "description": "Questions the prospect asked that the agent could not answer from the knowledge base (for the human sales team). Empty string if none.",
+        "is_system_provided": false,
+        "dynamic_variable": "",
+        "allowed_values_dynamic_variable": "",
+        "constant_value": "",
+        "is_omitted": false,
+        "llm_billed": false
+      }
+    },
+    "data_collection_scopes": {},
+    "analysis_items": {
+      "evaluation_criteria": [
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_4301m5dj8d2nf0181w3j6vp8y6ey",
+          "additional_version_ids": [],
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_0301m5dmwrteerkb1v2wqc2q69sm",
+          "additional_version_ids": [],
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_5301m5dmwrtsfwza6e0664g0tv12",
+          "additional_version_ids": [],
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_2801m5dmwrv1fsdv65d40xmgf19z",
+          "additional_version_ids": [],
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_5301m5dmwrv8e1ysj887nn4dwy60",
+          "additional_version_ids": [],
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_5501m5dmwrvfeg0aa2ec003ma2rr",
+          "additional_version_ids": [],
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_7001m5dmwrvpfz2b2qhxjamsg8g0",
+          "additional_version_ids": [],
+          "scope": "conversation"
+        }
+      ],
+      "data_collection": [
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_8701m5dj8d47exvaech9nhk389mn",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_9801m5dj8d4zfy48rdkcnzy1w0y5",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_0401m5dmwrx1ff29wh8fr2hhn8vb",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_6201m5dmwrxbfn0betexkj15bwrk",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_4501m5dmwrxhe1fbdhn4f6q4emke",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_7601m5dmwrxredw9phk7trj5x8kd",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_6001m5dmwrxyfkftjm2tywpfbqew",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_0001m5dmwry4fcc98848kvqe6m97",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_6601m5dj8d5wenfvv5t78bdrrb0a",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_0901m5dmwrywf53s4zwydpkv2wwx",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_6401m5dj8d64fgdrsqg4har19whc",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_7901m5dmwrznfb3rhxf6tg2kzedx",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_2601m5dmwrzxfvnvgcpnp8r7fgsj",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_7101m5dmws04ewq8zjeqwnnzb7dp",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_4301m5dmws0bfgerv0355bx63nkh",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_1401m5dmws0jetn9htjpvxxrkrjb",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_0601m5dmws0seqkszjpmw9t41fh5",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_8401m5dj8d7gfkear9tfyzg8a2np",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_0701m5dmws1gfhnt1kjnekv0yafr",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_8301m5dj8d81ef7b099vzzjdkkm8",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_9901m5dmws27ffta4ntf6sssx1x4",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_4801m5dmws2efm480x7brsg8b4a0",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_7701m5dmws2mfdpbc21e9r2drx3t",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_8001m5dmws2tecqr025zbnkj6k3e",
+          "scope": "conversation"
+        },
+        {
+          "source": "user",
+          "analysis_item_id": "aitem_9101m5dj8d9net8s1z425ptfwvzm",
+          "scope": "conversation"
+        }
+      ]
+    },
+    "overrides": {
+      "conversation_config_override": {
+        "asr": {
+          "keywords": false
+        },
+        "turn": {
+          "soft_timeout_config": {
+            "message": false,
+            "additional_soft_timeout_messages": false
+          },
+          "noisy_environment_message": false
+        },
+        "tts": {
+          "model_id": false,
+          "voice_id": false,
+          "supported_voices": false,
+          "stability": false,
+          "speed": false,
+          "similarity_boost": false,
+          "clone_strength": false,
+          "pronunciation_dictionary_locators": false
+        },
+        "conversation": {
+          "text_only": true,
+          "max_duration_seconds": false
+        },
+        "agent": {
+          "first_message": false,
+          "language": false,
+          "max_conversation_duration_message": false,
+          "silence_end_call_message": false,
+          "prompt": {
+            "prompt": false,
+            "llm": false,
+            "tool_ids": false,
+            "tool_ids_strict": false,
+            "native_mcp_server_ids": false,
+            "knowledge_base": false
+          }
+        }
+      },
+      "custom_llm_extra_body": false,
+      "enable_conversation_initiation_client_data_from_webhook": false,
+      "enable_starting_workflow_node_id_from_client": false,
+      "enable_procedure_ids_from_client": false
+    },
+    "workspace_overrides": {
+      "webhooks": {
+        "events": [
+          "transcript"
+        ],
+        "transcript_format": "json",
+        "exclude_transcript": false,
+        "send_audio": false
+      },
+      "cloud_storage_export": {
+        "events": [
+          "transcript"
+        ],
+        "transcript_format": "json"
+      }
+    },
+    "testing": {
+      "attached_tests": [],
+      "referenced_tests_ids": []
+    },
+    "archived": false,
+    "guardrails": {
+      "version": "1",
+      "focus": {
+        "is_enabled": true
+      },
+      "prompt_injection": {
+        "is_enabled": true
+      },
+      "synthetic_voice": {
+        "is_enabled": false,
+        "trigger_action": {
+          "type": "end_call"
+        }
+      },
+      "content": {
+        "execution_mode": "streaming",
+        "config": {
+          "sexual": {
+            "is_enabled": false,
+            "threshold": "medium"
+          },
+          "violence": {
+            "is_enabled": false,
+            "threshold": "medium"
+          },
+          "harassment": {
+            "is_enabled": false,
+            "threshold": "medium"
+          },
+          "self_harm": {
+            "is_enabled": false,
+            "threshold": "medium"
+          },
+          "profanity": {
+            "is_enabled": false,
+            "threshold": "medium"
+          },
+          "religion_or_politics": {
+            "is_enabled": false,
+            "threshold": "medium"
+          },
+          "medical_and_legal_information": {
+            "is_enabled": false,
+            "threshold": "medium"
+          }
+        },
+        "trigger_action": {
+          "type": "end_call"
+        }
+      },
+      "custom": {
+        "config": {
+          "configs": [
+            {
+              "is_enabled": true,
+              "name": "B2B sales compliance (claims, bookings, AI identity)",
+              "prompt": "The agent sells an 'AI Sales Employee' service to real estate companies. The reply may be in Egyptian Arabic or English. Block the agent reply ONLY if it does at least one of these: (1) states any price, price range, package, setup fee, discount or contract term for the service; (2) names any customer, gives a testimonial or case study, or quotes a performance statistic, conversion rate, savings figure or guaranteed result; (3) says CRM or Google Sheets sync, email, WhatsApp, calendar booking, live call transfer or a reporting dashboard is available today (saying it is planned is fine); (4) says a demo, meeting or callback IS booked, scheduled or confirmed, or that information HAS been sent, or that the call is being transferred now; (5) claims or implies the agent is a human; (6) promises a fixed onboarding time, security certification or legal guarantee; (7) asks for passwords, bank details, ID numbers or customer data. Do NOT block replies that say pricing will be prepared by the sales team, say a feature is planned, say the team will contact the prospect to confirm, or ask discovery questions.",
+              "execution_mode": "blocking",
+              "model": "gemini-3.1-flash-lite",
+              "history_message_count": 1,
+              "history_include_tool_calls": false,
+              "trigger_action": {
+                "type": "retry",
+                "feedback": "Your previous reply broke a B2B sales compliance rule (invented commercial claim, planned feature described as available, false booking/sending claim, human impersonation, or request for sensitive data). Rewrite it naturally in the same language without breaking that rule."
+              },
+              "evaluate_full_response_only": false
+            }
+          ]
+        }
+      }
+    },
+    "summary_language": "en",
+    "auth": {
+      "enable_auth": false,
+      "allowlist": [],
+      "require_origin_header": false
+    },
+    "call_limits": {
+      "agent_concurrency_limit": -1,
+      "daily_limit": 100000,
+      "bursting_enabled": true
+    },
+    "queueing_config": {
+      "enabled": true,
+      "wait_timeout_seconds": 180
+    },
+    "privacy": {
+      "record_voice": true,
+      "retention_days": -1,
+      "delete_transcript_and_pii": false,
+      "delete_audio": false,
+      "apply_to_existing_conversations": false,
+      "zero_retention_mode": false,
+      "nested_history_redaction": false,
+      "conversation_history_redaction": {
+        "enabled": false,
+        "entities": [],
+        "excluded_data_collection_ids": []
+      },
+      "user_memory": {
+        "enabled": false,
+        "scale": "balanced"
+      }
+    },
+    "trust_context": "unknown",
+    "analysis_llm": "gemini-2.5-flash",
+    "analysis_llm_billed": false,
+    "topic_discovery": {
+      "enabled": true
+    },
+    "sentiment_analysis": {
+      "enabled": true
+    },
+    "simulation_library": {
+      "enabled": false,
+      "test_ids": []
+    },
+    "safety": {
+      "is_blocked_ivc": false,
+      "is_blocked_non_ivc": false,
+      "ignore_safety_evaluation": false
+    }
+  },
+  "phone_numbers": [],
+  "whatsapp_accounts": [],
+  "workflow": {
+    "edges": {
+      "discovery_to_close": {
+        "source": "discovery",
+        "target": "close",
+        "forward_condition": {
+          "label": "discovery_to_close",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect declined to continue the conversation."
+        }
+      },
+      "discovery_to_dnc": {
+        "source": "discovery",
+        "target": "dnc",
+        "forward_condition": {
+          "label": "discovery_to_dnc",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+        }
+      },
+      "discovery_to_follow_up": {
+        "source": "discovery",
+        "target": "follow_up",
+        "forward_condition": {
+          "label": "discovery_to_follow_up",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect asked to speak with a person from the sales team instead of the AI."
+        }
+      },
+      "discovery_to_next_step": {
+        "source": "discovery",
+        "target": "next_step",
+        "forward_condition": {
+          "label": "discovery_to_next_step",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect does not want to answer questions but is still willing to hear about a next step."
+        }
+      },
+      "discovery_to_presentation": {
+        "source": "discovery",
+        "target": "presentation",
+        "forward_condition": {
+          "label": "discovery_to_presentation",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect has described how their company handles leads today AND their main sales challenge; OR they asked directly what the product does; OR four discovery questions have already been asked."
+        }
+      },
+      "follow_up_to_close": {
+        "source": "follow_up",
+        "target": "close",
+        "forward_condition": {
+          "label": "follow_up_to_close",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The preferred time and contact method for the follow-up have been captured, or the prospect declined to give them."
+        }
+      },
+      "follow_up_to_dnc": {
+        "source": "follow_up",
+        "target": "dnc",
+        "forward_condition": {
+          "label": "follow_up_to_dnc",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+        }
+      },
+      "next_step_to_close": {
+        "source": "next_step",
+        "target": "close",
+        "forward_condition": {
+          "label": "next_step_to_close",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect does not want any next step."
+        }
+      },
+      "next_step_to_dnc": {
+        "source": "next_step",
+        "target": "dnc",
+        "forward_condition": {
+          "label": "next_step_to_dnc",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+        }
+      },
+      "next_step_to_follow_up": {
+        "source": "next_step",
+        "target": "follow_up",
+        "forward_condition": {
+          "label": "next_step_to_follow_up",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect agreed to a specific next step: a demo, a meeting, a callback from the sales team, a proposal, information to be sent, or a later call."
+        }
+      },
+      "objection_to_close": {
+        "source": "objection",
+        "target": "close",
+        "forward_condition": {
+          "label": "objection_to_close",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "After the concern was addressed, the prospect clearly declined the solution."
+        }
+      },
+      "objection_to_dnc": {
+        "source": "objection",
+        "target": "dnc",
+        "forward_condition": {
+          "label": "objection_to_dnc",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+        }
+      },
+      "objection_to_follow_up": {
+        "source": "objection",
+        "target": "follow_up",
+        "forward_condition": {
+          "label": "objection_to_follow_up",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect asked to speak with a person from the sales team instead of the AI."
+        }
+      },
+      "objection_to_next_step": {
+        "source": "objection",
+        "target": "next_step",
+        "forward_condition": {
+          "label": "objection_to_next_step",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The concern was addressed and the prospect is ready to discuss next steps; OR the same concern came up twice without resolution; OR the question needs our human team (pricing, contracts, technical integration details, legal or data questions)."
+        }
+      },
+      "permission_to_close": {
+        "source": "permission",
+        "target": "close",
+        "forward_condition": {
+          "label": "permission_to_close",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect declined to talk, said they are not interested, or this is the wrong person or company."
+        }
+      },
+      "permission_to_discovery": {
+        "source": "permission",
+        "target": "discovery",
+        "forward_condition": {
+          "label": "permission_to_discovery",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect agreed that now is a good time to talk."
+        }
+      },
+      "permission_to_dnc": {
+        "source": "permission",
+        "target": "dnc",
+        "forward_condition": {
+          "label": "permission_to_dnc",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+        }
+      },
+      "permission_to_follow_up": {
+        "source": "permission",
+        "target": "follow_up",
+        "forward_condition": {
+          "label": "permission_to_follow_up",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect is busy and open to a callback at another time, or asked to speak with a person."
+        }
+      },
+      "presentation_to_close": {
+        "source": "presentation",
+        "target": "close",
+        "forward_condition": {
+          "label": "presentation_to_close",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect clearly said they are not interested in the solution."
+        }
+      },
+      "presentation_to_dnc": {
+        "source": "presentation",
+        "target": "dnc",
+        "forward_condition": {
+          "label": "presentation_to_dnc",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect asked not to be called or contacted again, or to be removed from the list, in any wording."
+        }
+      },
+      "presentation_to_follow_up": {
+        "source": "presentation",
+        "target": "follow_up",
+        "forward_condition": {
+          "label": "presentation_to_follow_up",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect asked to speak with a person from the sales team instead of the AI."
+        }
+      },
+      "presentation_to_next_step": {
+        "source": "presentation",
+        "target": "next_step",
+        "forward_condition": {
+          "label": "presentation_to_next_step",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect has heard how the AI Sales Employee could help them and either shows interest, asks how to proceed, or says they need time or internal approval."
+        }
+      },
+      "presentation_to_objection": {
+        "source": "presentation",
+        "target": "objection",
+        "forward_condition": {
+          "label": "presentation_to_objection",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The prospect raised a concern or objection, or asked a question about pricing, privacy, integrations, how natural the AI sounds, or how it would work for them."
+        },
+        "backward_condition": {
+          "label": "presentation_to_objection_return",
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "llm",
+          "condition": "The concern or question has been answered and the prospect is willing to hear more."
+        }
+      },
+      "start_to_permission": {
+        "source": "start_node",
+        "target": "permission",
+        "forward_condition": {
+          "exit_slot": {
+            "type": "any"
+          },
+          "type": "unconditional"
+        }
+      }
+    },
+    "nodes": {
+      "close": {
+        "type": "override_agent",
+        "position": {
+          "x": 2100,
+          "y": 0
+        },
+        "edge_order": [],
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "built_in_tools": {}
+            }
+          }
+        },
+        "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): CALL_SUMMARY then CALL_COMPLETED.\nObjective: in ONE sentence summarise the agreed next step (or that there is none), thank the prospect by name, say goodbye, then call the end_call tool.\nNot allowed: new questions, re-pitching, or any attempt to change their decision.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- تمام، فريقنا هيكلم حضرتك الخميس بعد الضهر. شكراً جداً لوقت حضرتك، مع السلامة.",
+        "additional_knowledge_base": [],
+        "additional_tool_ids": [],
+        "label": "Call summary & close",
+        "entry_behavior": "generate_immediately"
+      },
+      "discovery": {
+        "type": "override_agent",
+        "position": {
+          "x": 600,
+          "y": 0
+        },
+        "edge_order": [
+          "discovery_to_dnc",
+          "discovery_to_presentation",
+          "discovery_to_next_step",
+          "discovery_to_follow_up",
+          "discovery_to_close"
+        ],
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "built_in_tools": {}
+            }
+          }
+        },
+        "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): DISCOVERY.\nObjective: understand (1) how the company handles real estate leads today and (2) its main sales challenge. These two are REQUIRED. Optional, only if natural: company name, the prospect's role, sales team size, approximate monthly lead volume, CRM or Google Sheets in use.\nRules: ONE question per turn. Never repeat a question already answered; acknowledge what they said. Ask at most 4 questions in total. Do not ask for confidential figures; accept \"I'd rather not say\".\nInterruption rule: if they ask a short relevant question, answer it in one or two sentences from the knowledge base, then return to the next discovery question.\nNot allowed: pitching the full solution yet, inventing what other companies do.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- حضرتك بتتعاملوا مع الليدز اللي بتيجي لكم إزاي دلوقتي؟\n- فريق المبيعات بيكلم العملاء الجداد بنفسه؟\n- إيه أكتر حاجة بتتعبكم: الوصول للعميل، ولا تقييمه، ولا المتابعة؟\n- بتستخدموا CRM ولا جوجل شيت عشان تتابعوا العملاء؟",
+        "additional_knowledge_base": [],
+        "additional_tool_ids": [],
+        "label": "Discovery",
+        "entry_behavior": "auto"
+      },
+      "dnc": {
+        "type": "override_agent",
+        "position": {
+          "x": 2400,
+          "y": 400
+        },
+        "edge_order": [],
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "built_in_tools": {}
+            }
+          }
+        },
+        "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): DO_NOT_CALL (terminal).\nSay exactly one sentence in the prospect's language, then call end_call immediately. No questions, no apology for the product, no attempt to keep them.\nEgyptian Arabic: \"تمام، هسجّل إن محدش يتصل بحضرتك تاني. آسفة على الإزعاج، ويومك سعيد.\"\nEnglish: \"Understood, I'll make sure we don't call you again. Sorry for the interruption, have a good day.\"",
+        "additional_knowledge_base": [],
+        "additional_tool_ids": [],
+        "label": "Do not call",
+        "entry_behavior": "generate_immediately"
+      },
+      "follow_up": {
+        "type": "override_agent",
+        "position": {
+          "x": 1800,
+          "y": 0
+        },
+        "edge_order": [
+          "follow_up_to_dnc",
+          "follow_up_to_close"
+        ],
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "built_in_tools": {}
+            }
+          }
+        },
+        "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): FOLLOW_UP_CAPTURE.\nObjective: capture what is needed for the agreed follow-up: preferred day and time window, then preferred contact method (phone, WhatsApp or email). If they asked for a person, confirm the sales team will call them.\nRules: one question at a time. Repeat the details back in one sentence. Say the sales team will contact them to confirm. Never say a meeting or demo is booked, and never say anything has been sent.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- إمتى يكون مناسب لحضرتك؟ الصبح ولا بعد الضهر؟\n- تحب نتواصل مع حضرتك على التليفون ولا واتساب؟\n- تمام، فريق المبيعات هيتواصل مع حضرتك يوم الخميس بعد الضهر عشان يأكد الميعاد.",
+        "additional_knowledge_base": [],
+        "additional_tool_ids": [],
+        "label": "Follow-up capture",
+        "entry_behavior": "auto"
+      },
+      "next_step": {
+        "type": "override_agent",
+        "position": {
+          "x": 1500,
+          "y": 0
+        },
+        "edge_order": [
+          "next_step_to_dnc",
+          "next_step_to_follow_up",
+          "next_step_to_close"
+        ],
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "built_in_tools": {}
+            }
+          }
+        },
+        "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): NEXT_STEP_SELECTION.\nObjective: offer ONE appropriate next step and let the prospect choose. Options: a short product demo, a meeting with our sales team (including their decision maker), a callback from the sales team, information sent to them, or a later call.\nRules: one offer at a time; if declined, you may offer one alternative, then accept the answer. Calendar booking is NOT available: never say anything is booked or confirmed.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- تحب نرتب ديمو قصير تشوف فيه الموظف الذكي شغال على مشروع من مشاريعكم؟\n- ولا تفضّل حد من فريقنا يكلم حضرتك ويشرح التفاصيل؟",
+        "additional_knowledge_base": [],
+        "additional_tool_ids": [],
+        "label": "Next step selection",
+        "entry_behavior": "auto"
+      },
+      "objection": {
+        "type": "override_agent",
+        "position": {
+          "x": 1200,
+          "y": 200
+        },
+        "edge_order": [
+          "objection_to_dnc",
+          "objection_to_next_step",
+          "objection_to_follow_up",
+          "objection_to_close",
+          "presentation_to_objection"
+        ],
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "built_in_tools": {}
+            }
+          }
+        },
+        "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): OBJECTION_HANDLING.\nObjective: identify the prospect's concern, match it to the objection registry in the knowledge base (document \"05 - Objection Registry\"), and use THAT approved strategy, including any required disclosure. Then ask its permitted follow-up question.\nRules: if several concerns come together, handle the most important first (a request for a person, then privacy, then pricing, then the rest), one at a time. Never repeat the same pitch. If the same concern comes back a second time, offer a human follow-up instead of arguing. If the answer is not in the knowledge base, say you don't have that confirmed and offer the sales team.\nPricing: never give a number or range; use the approved pricing answer.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- فاهمة حضرتك تماماً.\n- بصراحة مش معايا رقم مؤكد أقوله لحضرتك دلوقتي، فريق المبيعات يقدر يجهز ده بعد ما يفهم احتياجكم.",
+        "additional_knowledge_base": [
+          {
+            "type": "text",
+            "name": "05 - Objection Registry",
+            "id": "79t6UeweAfwe0hvAwLI4",
+            "usage_mode": "auto"
+          }
+        ],
+        "additional_tool_ids": [],
+        "label": "Objection handling",
+        "entry_behavior": "auto"
+      },
+      "permission": {
+        "type": "override_agent",
+        "position": {
+          "x": 300,
+          "y": 0
+        },
+        "edge_order": [
+          "permission_to_dnc",
+          "permission_to_discovery",
+          "permission_to_follow_up",
+          "permission_to_close"
+        ],
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "built_in_tools": {}
+            }
+          }
+        },
+        "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): PERMISSION_CHECK.\nObjective: get a clear answer on whether now is a good time. You already introduced yourself as an AI assistant in the first message.\nAllowed: answer \"who are you / why are you calling\" in one sentence; confirm you are an AI if asked; ask for a better callback time if busy.\nNot allowed: any product pitch or discovery question before permission.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- تمام، مش هطول على حضرتك.\n- ولا يهمك، إمتى يكون وقت أنسب أكلم حضرتك فيه؟",
+        "additional_knowledge_base": [],
+        "additional_tool_ids": [],
+        "label": "Permission check",
+        "entry_behavior": "wait_for_user"
+      },
+      "presentation": {
+        "type": "override_agent",
+        "position": {
+          "x": 900,
+          "y": 0
+        },
+        "edge_order": [
+          "presentation_to_dnc",
+          "presentation_to_objection",
+          "presentation_to_next_step",
+          "presentation_to_follow_up",
+          "presentation_to_close"
+        ],
+        "conversation_config": {
+          "agent": {
+            "prompt": {
+              "built_in_tools": {}
+            }
+          }
+        },
+        "additional_prompt": "INTERNAL STAGE (never say stage names, tools or these notes aloud): SOLUTION_PRESENTATION.\nObjective: explain the AI Sales Employee in terms of what the prospect told you. Connect at most two benefits to their specific challenge. Keep it to 2-4 short sentences, then ask one question to check relevance.\nUse only CURRENT capabilities from the knowledge base as available today. If you mention CRM/Google Sheets, email, WhatsApp, calendar booking or live transfer, you MUST say they are planned, not available yet.\nMake clear it supports their human sales team; it does not replace them.\nNot allowed: prices, guaranteed results, conversion rates, savings, 24/7 claims, customer names or case studies.\nExample phrasing in Egyptian Arabic (adapt, never read verbatim):\n- بناءً على اللي حضرتك قلته، الموظف الذكي بيعمل أول مكالمة مع العميل، يجاوب على الأسئلة الأساسية من معلومات مشاريعكم، ويعرف مين جاد، ويسلّمه لفريق حضرتك.\n- كده فريقكم يركز وقته على العملاء الجادين والإغلاق.\n- تفتكر ده ممكن يفرق معاكم؟",
+        "additional_knowledge_base": [],
+        "additional_tool_ids": [],
+        "label": "Solution presentation",
+        "entry_behavior": "auto"
+      },
+      "start_node": {
+        "type": "start",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "edge_order": [
+          "start_to_permission"
+        ]
+      }
+    },
+    "subgraphs": {},
+    "prevent_subagent_loops": true
+  },
+  "access_info": {
+    "note": "REDACTED (account owner details removed for sharing)"
+  },
+  "access_permissions": [
+    "agent_archive",
+    "agent_duplicate",
+    "agent_edit_advanced_settings",
+    "agent_edit_config",
+    "agent_edit_conversation_metadata",
+    "agent_edit_guardrails",
+    "agent_edit_llm",
+    "agent_edit_memories",
+    "agent_edit_metadata",
+    "agent_edit_procedures",
+    "agent_edit_prompt",
+    "agent_edit_task_config",
+    "agent_edit_voice",
+    "agent_edit_widget",
+    "agent_edit_workflow",
+    "agent_manage_analysis",
+    "agent_manage_attached_knowledge_base",
+    "agent_manage_attached_mcp_servers",
+    "agent_manage_attached_pronunciation_dictionaries",
+    "agent_manage_attached_tests",
+    "agent_manage_attached_tools",
+    "agent_manage_batch_calling",
+    "agent_manage_branches",
+    "agent_manage_channels",
+    "agent_manage_experiments",
+    "agent_manage_phone_numbers",
+    "agent_manage_protected_branches",
+    "agent_manage_traffic",
+    "agent_manage_whatsapp",
+    "agent_merge_branches",
+    "agent_monitor_conversation",
+    "agent_publish_version",
+    "agent_rerun_conversation_analysis",
+    "agent_run_tasks",
+    "agent_run_tests",
+    "agent_search_conversations",
+    "agent_view_advanced_settings",
+    "agent_view_analysis",
+    "agent_view_analytics",
+    "agent_view_batch_calling",
+    "agent_view_channels",
+    "agent_view_config",
+    "agent_view_conversation_history",
+    "agent_view_costs",
+    "agent_view_experiments",
+    "agent_view_guardrails",
+    "agent_view_knowledge_base",
+    "agent_view_llm",
+    "agent_view_mcp_servers",
+    "agent_view_memories",
+    "agent_view_metadata",
+    "agent_view_phone_numbers",
+    "agent_view_procedures",
+    "agent_view_prompt",
+    "agent_view_pronunciation_dictionaries",
+    "agent_view_tasks",
+    "agent_view_tests",
+    "agent_view_tools",
+    "agent_view_version_history",
+    "agent_view_voice",
+    "agent_view_whatsapp",
+    "agent_view_widget",
+    "agent_view_workflow",
+    "resource_delete",
+    "resource_manage_access"
+  ],
+  "tags": [
+    "b2b",
+    "ai-sales-employee",
+    "egyptian-arabic",
+    "outbound",
+    "test-only"
+  ],
+  "version_id": "agtvrsn_3301m5dq0z00fchtsxr2w9cn7402",
+  "branch_id": "agtbrch_4201m5dhyfwtew6bpaxv7v9h32s4",
+  "main_branch_id": "agtbrch_4201m5dhyfwtew6bpaxv7v9h32s4",
+  "procedures": {
+    "agtprc_0401m5dpqs04e61be40h79m5wzcz": {
+      "procedure_id": "agtprc_0401m5dpqs04e61be40h79m5wzcz",
+      "version_id": "agtprcv_7101m5dq0z03f6braanw7nadwhap",
+      "name": "Follow-up capture (sub-procedure)",
+      "type": "deterministic",
+      "trigger": "",
+      "referenced_tool_ids": [],
+      "referenced_kb_ids": [],
+      "referenced_procedure_ids": [],
+      "referenced_dynamic_variables": []
+    },
+    "agtprc_8501m5dptv0yex8teh6z17wnpy01": {
+      "procedure_id": "agtprc_8501m5dptv0yex8teh6z17wnpy01",
+      "version_id": "agtprcv_6201m5dq0z08f5prtspehwdy5mhp",
+      "name": "Do-not-call request",
+      "type": "deterministic",
+      "trigger": "The prospect asks not to be called or contacted again, asks to be removed from the list, or says to stop calling, in any wording or language (e.g. \"متتصلوش بيا تاني\", \"شيلوا رقمي\", \"don't call me again\").",
+      "referenced_tool_ids": [],
+      "referenced_kb_ids": [],
+      "referenced_procedure_ids": [],
+      "referenced_dynamic_variables": []
+    },
+    "agtprc_2401m5dptvszekfs31q88jz3j4a8": {
+      "procedure_id": "agtprc_2401m5dptvszekfs31q88jz3j4a8",
+      "version_id": "agtprcv_8001m5dq0z0cevw8jw730sqbt2mc",
+      "name": "Prospect asks for a human",
+      "type": "deterministic",
+      "trigger": "The prospect asks to speak with a real person or someone from the sales team instead of the AI (e.g. \"عايز أكلم حد من الفريق\", \"مش عايز أكلم روبوت\", \"can I talk to a person\").",
+      "referenced_tool_ids": [],
+      "referenced_kb_ids": [],
+      "referenced_procedure_ids": [
+        "agtprc_0401m5dpqs04e61be40h79m5wzcz"
+      ],
+      "referenced_dynamic_variables": []
+    },
+    "agtprc_1701m5dptw8rets9qxfwdzgw1h83": {
+      "procedure_id": "agtprc_1701m5dptw8rets9qxfwdzgw1h83",
+      "version_id": "agtprcv_9901m5dq0z0gf1h8at13njp7smr5",
+      "name": "Pricing question",
+      "type": "deterministic",
+      "trigger": "The prospect asks about the price, cost, fees, packages, contract terms or discounts of the AI Sales Employee (e.g. \"بكام\", \"التكلفة كام\", \"how much does it cost\").",
+      "referenced_tool_ids": [],
+      "referenced_kb_ids": [],
+      "referenced_procedure_ids": [
+        "agtprc_0401m5dpqs04e61be40h79m5wzcz"
+      ],
+      "referenced_dynamic_variables": []
+    },
+    "agtprc_8601m5dptwzdfnp9ve489d1gzynw": {
+      "procedure_id": "agtprc_8601m5dptwzdfnp9ve489d1gzynw",
+      "version_id": "agtprcv_3201m5dq0z0ne6v8nkh0vzf8237j",
+      "name": "Case studies, references or results requested",
+      "type": "deterministic",
+      "trigger": "The prospect asks which companies use the service, for case studies, testimonials, references, performance statistics or guaranteed results (e.g. \"مين اشتغل معاكم\", \"عندكم أرقام\", \"case study\").",
+      "referenced_tool_ids": [],
+      "referenced_kb_ids": [],
+      "referenced_procedure_ids": [
+        "agtprc_0401m5dpqs04e61be40h79m5wzcz"
+      ],
+      "referenced_dynamic_variables": []
+    },
+    "agtprc_5801m5dptxgzewptjy1cwp22vb2d": {
+      "procedure_id": "agtprc_5801m5dptxgzewptjy1cwp22vb2d",
+      "version_id": "agtprcv_0301m5dq0z0sf8kvw47rnyf16c81",
+      "name": "Integration question (CRM, Sheets, WhatsApp, email, booking, transfer)",
+      "type": "deterministic",
+      "trigger": "The prospect asks whether the AI Sales Employee connects to their CRM or Google Sheets, sends WhatsApp or email, books meetings in a calendar, or transfers calls live.",
+      "referenced_tool_ids": [],
+      "referenced_kb_ids": [],
+      "referenced_procedure_ids": [],
+      "referenced_dynamic_variables": []
+    },
+    "agtprc_2801m5dpty6be0v8qftd52htwb84": {
+      "procedure_id": "agtprc_2801m5dpty6be0v8qftd52htwb84",
+      "version_id": "agtprcv_6501m5dq0z0xewdr7r68aqwx774h",
+      "name": "Are you a robot / real person?",
+      "type": "deterministic",
+      "trigger": "The prospect asks whether they are talking to a robot, an AI, a recording or a real person.",
+      "referenced_tool_ids": [],
+      "referenced_kb_ids": [],
+      "referenced_procedure_ids": [],
+      "referenced_dynamic_variables": []
+    },
+    "agtprc_4501m5dptyn8en1v0kp29n9rdr0b": {
+      "procedure_id": "agtprc_4501m5dptyn8en1v0kp29n9rdr0b",
+      "version_id": "agtprcv_6801m5dq0z11fk3bv983t685erxc",
+      "name": "Busy - call back later",
+      "type": "deterministic",
+      "trigger": "The prospect says they are busy right now or cannot talk, and is open to a call at another time.",
+      "referenced_tool_ids": [],
+      "referenced_kb_ids": [],
+      "referenced_procedure_ids": [],
+      "referenced_dynamic_variables": []
+    },
+    "agtprc_1101m5dptz35fg2regd0w0w24rg5": {
+      "procedure_id": "agtprc_1101m5dptz35fg2regd0w0w24rg5",
+      "version_id": "agtprcv_0001m5dq0z15fx0sh62x7qa22nh8",
+      "name": "Send me information",
+      "type": "deterministic",
+      "trigger": "The prospect asks to be sent details, a brochure or more information about the service.",
+      "referenced_tool_ids": [],
+      "referenced_kb_ids": [],
+      "referenced_procedure_ids": [],
+      "referenced_dynamic_variables": []
+    }
+  },
+  "trust_context": "unknown",
+  "default_hold_audio_url": "https://eleven-public-cdn-common.elevenlabs.io/convai/ambient-audio-assets/elevator1.mp3"
+}

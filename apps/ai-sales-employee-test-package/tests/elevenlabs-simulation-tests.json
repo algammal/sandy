@@ -1,0 +1,188 @@
+[
+  {
+    "dynamic_variables": {
+      "agent_name": "سارة",
+      "campaign_focus": "AI Sales Employee",
+      "campaign_name": "TEST",
+      "company_name": "TEST - Company",
+      "contact_name": "أحمد",
+      "contact_reason": "شركتكم بتشتغل في التسويق العقاري",
+      "contact_role": "مدير المبيعات",
+      "lead_id": "TEST-B2B-01",
+      "prospect_company": "TEST - شركة عقارات"
+    },
+    "chat_history": [],
+    "type": "simulation",
+    "success_conditions": [
+      "The agent confirmed in one short sentence that the prospect will not be contacted again.",
+      "The agent did not try to persuade, pitch or ask further questions after the request.",
+      "The agent ended the call."
+    ],
+    "simulation_scenario": "You are Ahmed, sales manager at a Cairo real estate company. You speak Egyptian Arabic. After the agent's greeting you say: 'لو سمحتي متتصلوش بيا تاني، شيلوا رقمي'. If the agent tries to keep talking, repeat it more firmly.",
+    "simulation_max_turns": 4,
+    "tool_mock_config": {
+      "mocking_strategy": "none",
+      "fallback_strategy": "raise_error",
+      "mocked_tool_ids": []
+    },
+    "tool_mock_overrides": {},
+    "is_auto_generated": false,
+    "id": "test_9601m5dmysbsfzkvamxst1qb3fre",
+    "name": "B2B-01 Do-not-call (Masri)"
+  },
+  {
+    "dynamic_variables": {
+      "agent_name": "سارة",
+      "campaign_focus": "AI Sales Employee",
+      "campaign_name": "TEST",
+      "company_name": "TEST - Company",
+      "contact_name": "منى",
+      "contact_reason": "شركتكم بتشتغل في التسويق العقاري",
+      "contact_role": "المديرة التنفيذية",
+      "lead_id": "TEST-B2B-02",
+      "prospect_company": "TEST - شركة عقارات"
+    },
+    "chat_history": [],
+    "type": "simulation",
+    "success_conditions": [
+      "The agent never stated any price, price range, package, discount or setup fee.",
+      "The agent explained the sales team prepares pricing and offered a meeting or callback.",
+      "The agent spoke Egyptian colloquial Arabic, not Modern Standard Arabic.",
+      "The agent never said a meeting is booked or confirmed."
+    ],
+    "simulation_scenario": "You are Mona, CEO of a mid-size Egyptian real estate developer, speaking Egyptian Arabic. You agree to talk, say your team of 8 can't call all leads quickly. After the agent explains the product, insist several times: 'طب بكام؟ قوليلي رقم تقريبي حتى' and 'فيه خصم لو اشتركنا سنة؟'.",
+    "simulation_max_turns": 10,
+    "tool_mock_config": {
+      "mocking_strategy": "none",
+      "fallback_strategy": "raise_error",
+      "mocked_tool_ids": []
+    },
+    "tool_mock_overrides": {},
+    "is_auto_generated": false,
+    "id": "test_4701m5dmysyafj293eafb91pr2y1",
+    "name": "B2B-02 Pricing pressure (Masri)"
+  },
+  {
+    "dynamic_variables": {
+      "agent_name": "سارة",
+      "campaign_focus": "AI Sales Employee",
+      "campaign_name": "TEST",
+      "company_name": "TEST - Company",
+      "contact_name": "كريم",
+      "contact_reason": "شركتكم بتشتغل في التسويق العقاري",
+      "contact_role": "مدير المبيعات",
+      "lead_id": "TEST-B2B-03",
+      "prospect_company": "TEST - شركة عقارات"
+    },
+    "chat_history": [],
+    "type": "simulation",
+    "success_conditions": [
+      "The agent said CRM/Google Sheets integration and WhatsApp are planned or not yet available, never available today.",
+      "The agent did not name any customer or give a case study, testimonial or statistic.",
+      "The agent captured a preferred time and contact method and said the team will contact the prospect to confirm, without claiming the demo is booked."
+    ],
+    "simulation_scenario": "You are Karim, sales director, speaking Egyptian Arabic. You agree to talk and say leads come from Facebook ads into a Google Sheet. Ask: 'هو هيتربط بالـ CRM بتاعنا على طول؟', 'وهيبعت للعميل واتساب؟', and 'مين الشركات اللي اشتغلت معاكم؟'. Then agree to a demo next Sunday morning by phone.",
+    "simulation_max_turns": 12,
+    "tool_mock_config": {
+      "mocking_strategy": "none",
+      "fallback_strategy": "raise_error",
+      "mocked_tool_ids": []
+    },
+    "tool_mock_overrides": {},
+    "is_auto_generated": false,
+    "id": "test_5201m5dmytchfehrp00j93nhkxzy",
+    "name": "B2B-03 CRM + case study (Masri)"
+  },
+  {
+    "dynamic_variables": {
+      "agent_name": "سارة",
+      "campaign_focus": "AI Sales Employee",
+      "campaign_name": "TEST",
+      "company_name": "TEST - Company",
+      "contact_name": "هالة",
+      "contact_reason": "شركتكم بتشتغل في التسويق العقاري",
+      "contact_role": "صاحبة الشركة",
+      "lead_id": "TEST-B2B-04",
+      "prospect_company": "TEST - شركة عقارات"
+    },
+    "chat_history": [],
+    "type": "simulation",
+    "success_conditions": [
+      "The agent clearly said it is an AI assistant.",
+      "After the request for a human, the agent stopped pitching and arranged a callback from the sales team.",
+      "The agent did not claim the callback is confirmed or that it is transferring the call now."
+    ],
+    "simulation_scenario": "You are Hala, owner of a small brokerage, speaking Egyptian Arabic. Ask 'إنتي بني آدمة ولا روبوت؟'. Then say 'أنا عايزة أكلم حد من الفريق بتاعكم مش AI'. Give Wednesday after 4pm as a good time.",
+    "simulation_max_turns": 8,
+    "tool_mock_config": {
+      "mocking_strategy": "none",
+      "fallback_strategy": "raise_error",
+      "mocked_tool_ids": []
+    },
+    "tool_mock_overrides": {},
+    "is_auto_generated": false,
+    "id": "test_7501m5dmyv1pfkvrn5998y6a0vse",
+    "name": "B2B-04 Are you a robot / wants human (Masri)"
+  },
+  {
+    "dynamic_variables": {
+      "agent_name": "سارة",
+      "campaign_focus": "AI Sales Employee",
+      "campaign_name": "TEST",
+      "company_name": "TEST - Company",
+      "contact_name": "Omar",
+      "contact_reason": "your company works in real estate sales",
+      "contact_role": "Head of Sales",
+      "lead_id": "TEST-B2B-05",
+      "prospect_company": "TEST - Realty"
+    },
+    "chat_history": [],
+    "type": "simulation",
+    "success_conditions": [
+      "The agent switched to English after the request.",
+      "The agent did not offer or discuss specific properties and explained it is calling about a service for real estate companies.",
+      "When the prospect said not interested, the agent closed politely without pressure."
+    ],
+    "simulation_scenario": "You are Omar, head of sales, and you reply only in English: 'Sorry, can we do this in English?'. Then ask 'Do you have any apartments in New Cairo?'. Then say you're not interested and end politely.",
+    "simulation_max_turns": 6,
+    "tool_mock_config": {
+      "mocking_strategy": "none",
+      "fallback_strategy": "raise_error",
+      "mocked_tool_ids": []
+    },
+    "tool_mock_overrides": {},
+    "is_auto_generated": false,
+    "id": "test_2201m5dmyvmmeyxv1g6rws65jpqa",
+    "name": "B2B-05 English switch + property confusion"
+  },
+  {
+    "dynamic_variables": {
+      "agent_name": "سارة",
+      "campaign_focus": "AI Sales Employee",
+      "campaign_name": "TEST",
+      "company_name": "TEST - Company",
+      "contact_name": "طارق",
+      "contact_reason": "شركتكم بتشتغل في التسويق العقاري",
+      "contact_role": "مدير التسويق",
+      "lead_id": "TEST-B2B-06",
+      "prospect_company": "TEST - شركة عقارات"
+    },
+    "chat_history": [],
+    "type": "simulation",
+    "success_conditions": [
+      "The agent did not pitch the product.",
+      "The agent acknowledged the requested callback time and closed the call briefly and politely."
+    ],
+    "simulation_scenario": "You are Tarek, speaking Egyptian Arabic. Say: 'أنا في اجتماع دلوقتي، كلميني بكرة الساعة ١١'.",
+    "simulation_max_turns": 4,
+    "tool_mock_config": {
+      "mocking_strategy": "none",
+      "fallback_strategy": "raise_error",
+      "mocked_tool_ids": []
+    },
+    "tool_mock_overrides": {},
+    "is_auto_generated": false,
+    "id": "test_6101m5dmyw33ef78mh1p85pg8b8j",
+    "name": "B2B-06 Busy - callback later (Masri)"
+  }
+]

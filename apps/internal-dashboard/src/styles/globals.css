@@ -1,0 +1,135 @@
+@import "tailwindcss";
+@import "@sandy/ui/styles/theme.css";
+
+@source "../../../../packages/ui/src";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * "Aether Voice Studio" — the internal dashboard's own retune of the shared
+ * @sandy/ui tokens (same variable names, different values) so this app reads
+ * as a technical, operational console — enterprise voice-AI infrastructure —
+ * while the client portal keeps the calmer default palette. Grounded in a
+ * Stitch design reference (DESIGN.md): deep-abyss glass with electric
+ * indigo, resonant cyan and synthetic violet accents.
+ */
+:root {
+  --sandy-background: #f8fafc;
+  --sandy-background-elevated: #ffffff;
+  --sandy-surface: #ffffff;
+  --sandy-surface-glass: rgb(255 255 255 / 0.72);
+  --sandy-surface-glass-strong: rgb(255 255 255 / 0.85);
+  --sandy-border: rgb(15 23 42 / 0.08);
+  --sandy-border-strong: rgb(15 23 42 / 0.16);
+  --sandy-foreground: #0f172a;
+  --sandy-muted-foreground: #5b6578;
+  --sandy-primary: #4f46e5;
+  --sandy-primary-strong: #4338ca;
+  --sandy-primary-foreground: #ffffff;
+  --sandy-accent: #0891b2;
+  --sandy-success: #059669;
+  --sandy-success-bg: rgb(5 150 105 / 0.12);
+  --sandy-warning: #b45309;
+  --sandy-warning-bg: rgb(180 83 9 / 0.12);
+  --sandy-danger: #be123c;
+  --sandy-danger-bg: rgb(225 29 72 / 0.1);
+  --sandy-info: #0284c7;
+  --sandy-info-bg: rgb(2 132 199 / 0.12);
+  --sandy-ring: rgb(79 70 229 / 0.4);
+  --sandy-shadow-color: rgb(15 23 42 / 0.1);
+  --sandy-gradient-glow: radial-gradient(circle at 15% -10%, rgb(79 70 229 / 0.1), transparent 55%),
+    radial-gradient(circle at 85% 0%, rgb(8 145 178 / 0.08), transparent 50%);
+  --sandy-tertiary: #7c3aed;
+}
+
+:root.dark {
+  --sandy-background: #030712;
+  --sandy-background-elevated: #0b0f19;
+  --sandy-surface: #0f172a;
+  --sandy-surface-glass: rgb(30 41 59 / 0.45);
+  --sandy-surface-glass-strong: rgb(15 23 42 / 0.7);
+  --sandy-border: rgb(255 255 255 / 0.08);
+  --sandy-border-strong: rgb(255 255 255 / 0.14);
+  --sandy-foreground: #dde2f3;
+  --sandy-muted-foreground: #8b93a7;
+  --sandy-primary: #818cf8;
+  --sandy-primary-strong: #a5b4fc;
+  --sandy-primary-foreground: #0b0f19;
+  --sandy-accent: #22d3ee;
+  --sandy-success: #34d399;
+  --sandy-success-bg: rgb(16 185 129 / 0.14);
+  --sandy-warning: #fbbf24;
+  --sandy-warning-bg: rgb(217 119 6 / 0.16);
+  --sandy-danger: #fb7185;
+  --sandy-danger-bg: rgb(225 29 72 / 0.14);
+  --sandy-info: #38bdf8;
+  --sandy-info-bg: rgb(2 132 199 / 0.16);
+  --sandy-ring: rgb(99 102 241 / 0.5);
+  --sandy-shadow-color: rgb(0 0 0 / 0.55);
+  --sandy-gradient-glow: radial-gradient(circle at 12% -10%, rgb(99 102 241 / 0.22), transparent 55%),
+    radial-gradient(circle at 88% 0%, rgb(34 211 238 / 0.14), transparent 50%),
+    radial-gradient(circle at 50% 110%, rgb(30 27 75 / 0.4), transparent 60%);
+  --sandy-tertiary: #a78bfa;
+}
+
+@theme inline {
+  --color-background: var(--sandy-background);
+  --color-surface: var(--sandy-surface);
+  --color-foreground: var(--sandy-foreground);
+  --color-muted-foreground: var(--sandy-muted-foreground);
+  --color-border: var(--sandy-border);
+  --color-primary: var(--sandy-primary);
+  --color-primary-foreground: var(--sandy-primary-foreground);
+  --color-success: var(--sandy-success);
+  --color-warning: var(--sandy-warning);
+  --color-danger: var(--sandy-danger);
+  --color-info: var(--sandy-info);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono-technical: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+html,
+body {
+  background-color: var(--sandy-background);
+  color: var(--sandy-foreground);
+}
+
+body {
+  background-image: var(--sandy-gradient-glow);
+  background-attachment: fixed;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+}
+
+* {
+  border-color: var(--sandy-border);
+}
+
+::selection {
+  background-color: var(--sandy-primary);
+  color: var(--sandy-primary-foreground);
+}
+
+:focus-visible {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+}
+
+.font-technical {
+  font-family: var(--font-mono-technical);
+}
+
+.label-caps {
+  font-family: var(--font-mono-technical);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

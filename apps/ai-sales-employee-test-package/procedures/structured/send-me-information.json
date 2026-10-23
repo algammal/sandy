@@ -1,0 +1,10 @@
+{
+  "procedure_id": "agtprc_1101m5dptz35fg2regd0w0w24rg5",
+  "version_id": "agtprcv_0001m5dq0z15fx0sh62x7qa22nh8",
+  "name": "Send me information",
+  "type": "deterministic",
+  "trigger": "The prospect asks to be sent details, a brochure or more information about the service.",
+  "content": "{\"steps\":[{\"type\":\"ask\",\"instruction\":\"Ask in one short question whether they prefer to receive it by WhatsApp or email.\"},{\"type\":\"say\",\"message\":\"تمام، فريق المبيعات هيبعت التفاصيل لحضرتك.\",\"message_translations\":{\"en\":{\"value\":\"Great, our sales team will send you the details.\"}}},{\"type\":\"tell\",\"instruction\":\"Continue the conversation where it was, or thank them and close politely if they want to end. Never say the information has already been sent.\"}]}",
+  "guardrails": [],
+  "referenced_procedure_ids": []
+}

@@ -1,0 +1,24 @@
+{
+  "name": "voice-agent-platform",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:client": "npm run dev -w @sandy/client-portal",
+    "dev:internal": "npm run dev -w @sandy/internal-dashboard",
+    "build": "npm run build -w @sandy/client-portal && npm run build -w @sandy/internal-dashboard",
+    "build:client": "npm run build -w @sandy/client-portal",
+    "build:internal": "npm run build -w @sandy/internal-dashboard",
+    "lint": "npm run lint -w @sandy/client-portal && npm run lint -w @sandy/internal-dashboard",
+    "typecheck": "npm run typecheck -w @sandy/client-portal && npm run typecheck -w @sandy/internal-dashboard",
+    "test": "npm run test -w @sandy/client-portal && npm run test -w @sandy/internal-dashboard",
+    "test:client": "npm run test -w @sandy/client-portal",
+    "test:internal": "npm run test -w @sandy/internal-dashboard"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

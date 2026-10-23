@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "@sandy/ui/styles/theme.css";
+
+@source "../../../../packages/ui/src";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--sandy-background);
+  --color-surface: var(--sandy-surface);
+  --color-foreground: var(--sandy-foreground);
+  --color-muted-foreground: var(--sandy-muted-foreground);
+  --color-border: var(--sandy-border);
+  --color-primary: var(--sandy-primary);
+  --color-primary-foreground: var(--sandy-primary-foreground);
+  --color-success: var(--sandy-success);
+  --color-warning: var(--sandy-warning);
+  --color-danger: var(--sandy-danger);
+  --color-info: var(--sandy-info);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  background-color: var(--sandy-background);
+  color: var(--sandy-foreground);
+}
+
+body {
+  background-image: var(--sandy-gradient-glow);
+  background-attachment: fixed;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+}
+
+* {
+  border-color: var(--sandy-border);
+}
+
+::selection {
+  background-color: var(--sandy-primary);
+  color: var(--sandy-primary-foreground);
+}
+
+:focus-visible {
+  outline: none;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--sandy-border-strong);
+  border-radius: 999px;
+}

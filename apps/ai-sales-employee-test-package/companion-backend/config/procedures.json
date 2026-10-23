@@ -1,0 +1,279 @@
+{
+  "_comment": "ElevenLabs STRUCTURED (type=deterministic) procedures: fixed step order, every time. 'say' steps are spoken verbatim (Arabic, with an English translation). Rendered by scripts/print-procedures.js; {{FOLLOW_UP_CAPTURE}} is replaced with that sub-procedure's id. Wording must stay consistent with config/sales-playbook.json (prohibited claims, registry strategies).",
+  "procedures": [
+    {
+      "key": "follow_up_capture",
+      "name": "Follow-up capture (sub-procedure)",
+      "trigger": "",
+      "steps": [
+        {
+          "type": "ask",
+          "instruction": "Ask, in one short question, which day and time window suits them for our sales team to contact them (for example morning or afternoon). If they decline to give a time, accept that and move on."
+        },
+        {
+          "type": "ask",
+          "instruction": "Ask, in one short question, whether they prefer to be contacted by phone, WhatsApp or email. If they have no preference, accept that and move on."
+        },
+        {
+          "type": "tell",
+          "instruction": "In one sentence, repeat back the day/time and contact method they gave, and say our sales team will contact them to confirm. Never say that anything is booked, scheduled, confirmed or already sent."
+        }
+      ]
+    },
+    {
+      "key": "do_not_call",
+      "name": "Do-not-call request",
+      "trigger": "The prospect asks not to be called or contacted again, asks to be removed from the list, or says to stop calling, in any wording or language (e.g. \"متتصلوش بيا تاني\", \"شيلوا رقمي\", \"don't call me again\").",
+      "steps": [
+        {
+          "type": "say",
+          "message": "تمام، هسجّل إن محدش يتصل بحضرتك تاني. آسفة على الإزعاج، ويومك سعيد.",
+          "message_translations": {
+            "en": "Understood, I'll make sure we don't call you again. Sorry for the interruption, have a good day."
+          }
+        },
+        {
+          "type": "system_tool",
+          "system_tool_name": "end_call"
+        }
+      ]
+    },
+    {
+      "key": "human_requested",
+      "name": "Prospect asks for a human",
+      "trigger": "The prospect asks to speak with a real person or someone from the sales team instead of the AI (e.g. \"عايز أكلم حد من الفريق\", \"مش عايز أكلم روبوت\", \"can I talk to a person\").",
+      "steps": [
+        {
+          "type": "say",
+          "message": "أكيد، هخلّي حد من فريق المبيعات يكلّم حضرتك بنفسه.",
+          "message_translations": {
+            "en": "Of course, I'll have someone from our sales team call you personally."
+          }
+        },
+        {
+          "type": "sub_procedure",
+          "procedure_id": "{{FOLLOW_UP_CAPTURE}}"
+        },
+        {
+          "type": "say",
+          "message": "شكراً جداً لوقت حضرتك، مع السلامة.",
+          "message_translations": {
+            "en": "Thank you very much for your time. Goodbye."
+          }
+        },
+        {
+          "type": "system_tool",
+          "system_tool_name": "end_call"
+        }
+      ]
+    },
+    {
+      "key": "pricing_question",
+      "name": "Pricing question",
+      "trigger": "The prospect asks about the price, cost, fees, packages, contract terms or discounts of the AI Sales Employee (e.g. \"بكام\", \"التكلفة كام\", \"how much does it cost\").",
+      "steps": [
+        {
+          "type": "say",
+          "message": "التكلفة بتختلف حسب احتياج كل شركة، وفريق المبيعات بيجهّز عرض مخصوص بعد ما يفهم احتياجكم، فمش هقدر أقول رقم دلوقتي.",
+          "message_translations": {
+            "en": "The cost depends on each company's needs, and our sales team prepares a tailored proposal once they understand yours, so I can't give a number right now."
+          }
+        },
+        {
+          "type": "ask",
+          "instruction": "Ask in one short question whether they would like a short meeting with our sales team to prepare the pricing for them. Never mention any number, range or discount."
+        },
+        {
+          "type": "branch",
+          "branches": [
+            {
+              "condition": {
+                "type": "llm",
+                "condition": "The prospect agreed to a meeting or a call with the sales team."
+              },
+              "steps": [
+                {
+                  "type": "sub_procedure",
+                  "procedure_id": "{{FOLLOW_UP_CAPTURE}}"
+                },
+                {
+                  "type": "say",
+                  "message": "شكراً جداً لوقت حضرتك، مع السلامة.",
+                  "message_translations": {
+                    "en": "Thank you very much for your time. Goodbye."
+                  }
+                },
+                {
+                  "type": "system_tool",
+                  "system_tool_name": "end_call"
+                }
+              ]
+            },
+            {
+              "condition": {
+                "type": "llm",
+                "condition": "The prospect did not agree to a meeting, declined, or wants to continue the conversation first."
+              },
+              "steps": [
+                {
+                  "type": "tell",
+                  "instruction": "Acknowledge briefly in one sentence without pressure, then continue the conversation where it was. Do not mention pricing again unless they ask."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "case_study_request",
+      "name": "Case studies, references or results requested",
+      "trigger": "The prospect asks which companies use the service, for case studies, testimonials, references, performance statistics or guaranteed results (e.g. \"مين اشتغل معاكم\", \"عندكم أرقام\", \"case study\").",
+      "steps": [
+        {
+          "type": "say",
+          "message": "بصراحة مش معايا أسماء عملاء أو دراسات حالة أقدر أشاركها دلوقتي، ومش هقول أرقام مش مؤكدة.",
+          "message_translations": {
+            "en": "Honestly, I don't have client names or case studies I can share right now, and I won't quote figures that aren't confirmed."
+          }
+        },
+        {
+          "type": "ask",
+          "instruction": "Ask in one short question whether a short demo using one of their own projects would help instead."
+        },
+        {
+          "type": "branch",
+          "branches": [
+            {
+              "condition": {
+                "type": "llm",
+                "condition": "The prospect agreed to a demo."
+              },
+              "steps": [
+                {
+                  "type": "sub_procedure",
+                  "procedure_id": "{{FOLLOW_UP_CAPTURE}}"
+                },
+                {
+                  "type": "say",
+                  "message": "شكراً جداً لوقت حضرتك، مع السلامة.",
+                  "message_translations": {
+                    "en": "Thank you very much for your time. Goodbye."
+                  }
+                },
+                {
+                  "type": "system_tool",
+                  "system_tool_name": "end_call"
+                }
+              ]
+            },
+            {
+              "condition": {
+                "type": "llm",
+                "condition": "The prospect did not agree to a demo or wants to continue the conversation first."
+              },
+              "steps": [
+                {
+                  "type": "tell",
+                  "instruction": "Acknowledge briefly in one sentence, then continue the conversation where it was."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "integration_question",
+      "name": "Integration question (CRM, Sheets, WhatsApp, email, booking, transfer)",
+      "trigger": "The prospect asks whether the AI Sales Employee connects to their CRM or Google Sheets, sends WhatsApp or email, books meetings in a calendar, or transfers calls live.",
+      "steps": [
+        {
+          "type": "say",
+          "message": "الربط مع الـ CRM وجوجل شيت والواتساب والإيميل وحجز المواعيد لسه قيد التطوير ومش متاح النهارده. النهارده كل مكالمة بتطلع بنتيجة وملخص منظم بيتسلّم لفريقكم.",
+          "message_translations": {
+            "en": "Integrations with CRM, Google Sheets, WhatsApp, email and calendar booking are still in development and not available today. Today, every call produces a structured outcome and summary for your team."
+          }
+        },
+        {
+          "type": "tell",
+          "instruction": "If they ask for technical specifics beyond the knowledge base, say our team can cover them in a meeting. Otherwise continue the conversation where it was."
+        }
+      ]
+    },
+    {
+      "key": "ai_identity",
+      "name": "Are you a robot / real person?",
+      "trigger": "The prospect asks whether they are talking to a robot, an AI, a recording or a real person.",
+      "steps": [
+        {
+          "type": "say",
+          "message": "أيوه، أنا مساعدة مبيعات بالذكاء الاصطناعي، ولو تحبوا تتكلموا مع حد من الفريق في أي وقت، أقدر أرتّب ده.",
+          "message_translations": {
+            "en": "Yes, I'm an AI sales assistant, and if at any point you'd like to speak with someone from our team, I can arrange that."
+          }
+        },
+        {
+          "type": "tell",
+          "instruction": "Continue the conversation where it was, in one short sentence."
+        }
+      ]
+    },
+    {
+      "key": "busy_callback",
+      "name": "Busy - call back later",
+      "trigger": "The prospect says they are busy right now or cannot talk, and is open to a call at another time.",
+      "steps": [
+        {
+          "type": "ask",
+          "instruction": "Ask in one short question what day and time would be better for a callback. If they don't want to give one, accept that."
+        },
+        {
+          "type": "say",
+          "message": "تمام، فريقنا هيتواصل مع حضرتك في الوقت ده. شكراً، مع السلامة.",
+          "message_translations": {
+            "en": "Great, our team will reach out at that time. Thank you, goodbye."
+          }
+        },
+        {
+          "type": "system_tool",
+          "system_tool_name": "end_call"
+        }
+      ]
+    },
+    {
+      "key": "send_information",
+      "name": "Send me information",
+      "trigger": "The prospect asks to be sent details, a brochure or more information about the service.",
+      "steps": [
+        {
+          "type": "ask",
+          "instruction": "Ask in one short question whether they prefer to receive it by WhatsApp or email."
+        },
+        {
+          "type": "say",
+          "message": "تمام، فريق المبيعات هيبعت التفاصيل لحضرتك.",
+          "message_translations": {
+            "en": "Great, our sales team will send you the details."
+          }
+        },
+        {
+          "type": "tell",
+          "instruction": "Continue the conversation where it was, or thank them and close politely if they want to end. Never say the information has already been sent."
+        }
+      ]
+    }
+  ],
+  "deployed_ids": {
+    "_comment": "ElevenLabs procedure ids on agent YOUR_TEST_AGENT_ID (main branch). Used to recognise which structured procedure ran in a call transcript.",
+    "follow_up_capture": "agtprc_0401m5dpqs04e61be40h79m5wzcz",
+    "do_not_call": "agtprc_8501m5dptv0yex8teh6z17wnpy01",
+    "human_requested": "agtprc_2401m5dptvszekfs31q88jz3j4a8",
+    "pricing_question": "agtprc_1701m5dptw8rets9qxfwdzgw1h83",
+    "case_study_request": "agtprc_8601m5dptwzdfnp9ve489d1gzynw",
+    "integration_question": "agtprc_5801m5dptxgzewptjy1cwp22vb2d",
+    "ai_identity": "agtprc_2801m5dpty6be0v8qftd52htwb84",
+    "busy_callback": "agtprc_4501m5dptyn8en1v0kp29n9rdr0b",
+    "send_information": "agtprc_1101m5dptz35fg2regd0w0w24rg5"
+  }
+}

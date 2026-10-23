@@ -1,0 +1,12 @@
+{
+  "procedure_id": "agtprc_2401m5dptvszekfs31q88jz3j4a8",
+  "version_id": "agtprcv_8001m5dq0z0cevw8jw730sqbt2mc",
+  "name": "Prospect asks for a human",
+  "type": "deterministic",
+  "trigger": "The prospect asks to speak with a real person or someone from the sales team instead of the AI (e.g. \"عايز أكلم حد من الفريق\", \"مش عايز أكلم روبوت\", \"can I talk to a person\").",
+  "content": "{\"steps\":[{\"type\":\"say\",\"message\":\"أكيد، هخلّي حد من فريق المبيعات يكلّم حضرتك بنفسه.\",\"message_translations\":{\"en\":{\"value\":\"Of course, I'll have someone from our sales team call you personally.\"}}},{\"type\":\"sub_procedure\",\"procedure_id\":\"agtprc_0401m5dpqs04e61be40h79m5wzcz\"},{\"type\":\"say\",\"message\":\"شكراً جداً لوقت حضرتك، مع السلامة.\",\"message_translations\":{\"en\":{\"value\":\"Thank you very much for your time. Goodbye.\"}}},{\"type\":\"system_tool\",\"system_tool_name\":\"end_call\"}]}",
+  "guardrails": [],
+  "referenced_procedure_ids": [
+    "agtprc_0401m5dpqs04e61be40h79m5wzcz"
+  ]
+}

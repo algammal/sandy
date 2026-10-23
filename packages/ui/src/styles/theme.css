@@ -1,0 +1,69 @@
+/*
+ * Shared design tokens for the premium glassmorphism design system.
+ * Both apps import this file and map the tokens into their Tailwind `@theme`
+ * block, so changing a value here updates both applications consistently.
+ */
+
+:root {
+  --sandy-background: #f7f7fb;
+  --sandy-background-elevated: #ffffff;
+  --sandy-surface: #ffffff;
+  --sandy-surface-glass: rgb(255 255 255 / 0.6);
+  --sandy-surface-glass-strong: rgb(255 255 255 / 0.78);
+  --sandy-border: rgb(15 23 42 / 0.08);
+  --sandy-border-strong: rgb(15 23 42 / 0.14);
+  --sandy-foreground: #0f172a;
+  --sandy-muted-foreground: #64748b;
+  --sandy-primary: #4f46e5;
+  --sandy-primary-strong: #4338ca;
+  --sandy-primary-foreground: #ffffff;
+  --sandy-accent: #0ea5a3;
+  --sandy-success: #16a34a;
+  --sandy-success-bg: rgb(22 163 74 / 0.12);
+  --sandy-warning: #b45309;
+  --sandy-warning-bg: rgb(180 83 9 / 0.12);
+  --sandy-danger: #dc2626;
+  --sandy-danger-bg: rgb(220 38 38 / 0.12);
+  --sandy-info: #0284c7;
+  --sandy-info-bg: rgb(2 132 199 / 0.12);
+  --sandy-ring: rgb(79 70 229 / 0.45);
+  --sandy-shadow-color: rgb(15 23 42 / 0.08);
+  --sandy-gradient-glow: radial-gradient(
+      circle at 15% -10%,
+      rgb(99 102 241 / 0.18),
+      transparent 55%
+    ),
+    radial-gradient(circle at 85% 0%, rgb(14 165 163 / 0.12), transparent 50%);
+}
+
+:root.dark {
+  --sandy-background: #0a0b10;
+  --sandy-background-elevated: #12131c;
+  --sandy-surface: #15161f;
+  --sandy-surface-glass: rgb(30 32 46 / 0.55);
+  --sandy-surface-glass-strong: rgb(30 32 46 / 0.75);
+  --sandy-border: rgb(255 255 255 / 0.08);
+  --sandy-border-strong: rgb(255 255 255 / 0.14);
+  --sandy-foreground: #f1f5f9;
+  --sandy-muted-foreground: #94a3b8;
+  --sandy-primary: #818cf8;
+  --sandy-primary-strong: #a5b4fc;
+  --sandy-primary-foreground: #0f172a;
+  --sandy-accent: #2dd4c7;
+  --sandy-success: #4ade80;
+  --sandy-success-bg: rgb(74 222 128 / 0.14);
+  --sandy-warning: #fbbf24;
+  --sandy-warning-bg: rgb(251 191 36 / 0.14);
+  --sandy-danger: #f87171;
+  --sandy-danger-bg: rgb(248 113 113 / 0.14);
+  --sandy-info: #38bdf8;
+  --sandy-info-bg: rgb(56 189 248 / 0.14);
+  --sandy-ring: rgb(129 140 248 / 0.5);
+  --sandy-shadow-color: rgb(0 0 0 / 0.45);
+  --sandy-gradient-glow: radial-gradient(
+      circle at 15% -10%,
+      rgb(99 102 241 / 0.25),
+      transparent 55%
+    ),
+    radial-gradient(circle at 85% 0%, rgb(45 212 199 / 0.16), transparent 50%);
+}

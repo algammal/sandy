@@ -1,0 +1,12 @@
+{
+  "procedure_id": "agtprc_8601m5dptwzdfnp9ve489d1gzynw",
+  "version_id": "agtprcv_3201m5dq0z0ne6v8nkh0vzf8237j",
+  "name": "Case studies, references or results requested",
+  "type": "deterministic",
+  "trigger": "The prospect asks which companies use the service, for case studies, testimonials, references, performance statistics or guaranteed results (e.g. \"مين اشتغل معاكم\", \"عندكم أرقام\", \"case study\").",
+  "content": "{\"steps\":[{\"type\":\"say\",\"message\":\"بصراحة مش معايا أسماء عملاء أو دراسات حالة أقدر أشاركها دلوقتي، ومش هقول أرقام مش مؤكدة.\",\"message_translations\":{\"en\":{\"value\":\"Honestly, I don't have client names or case studies I can share right now, and I won't quote figures that aren't confirmed.\"}}},{\"type\":\"ask\",\"instruction\":\"Ask in one short question whether a short demo using one of their own projects would help instead.\"},{\"type\":\"branch\",\"branches\":[{\"condition\":{\"type\":\"llm\",\"condition\":\"The prospect agreed to a demo.\"},\"steps\":[{\"type\":\"sub_procedure\",\"procedure_id\":\"agtprc_0401m5dpqs04e61be40h79m5wzcz\"},{\"type\":\"say\",\"message\":\"شكراً جداً لوقت حضرتك، مع السلامة.\",\"message_translations\":{\"en\":{\"value\":\"Thank you very much for your time. Goodbye.\"}}},{\"type\":\"system_tool\",\"system_tool_name\":\"end_call\"}]},{\"condition\":{\"type\":\"llm\",\"condition\":\"The prospect did not agree to a demo or wants to continue the conversation first.\"},\"steps\":[{\"type\":\"tell\",\"instruction\":\"Acknowledge briefly in one sentence, then continue the conversation where it was.\"}]}]}]}",
+  "guardrails": [],
+  "referenced_procedure_ids": [
+    "agtprc_0401m5dpqs04e61be40h79m5wzcz"
+  ]
+}

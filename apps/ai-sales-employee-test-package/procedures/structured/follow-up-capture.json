@@ -1,0 +1,10 @@
+{
+  "procedure_id": "agtprc_0401m5dpqs04e61be40h79m5wzcz",
+  "version_id": "agtprcv_7101m5dq0z03f6braanw7nadwhap",
+  "name": "Follow-up capture (sub-procedure)",
+  "type": "deterministic",
+  "trigger": "",
+  "content": "{\"steps\": [{\"type\": \"ask\", \"instruction\": \"Ask, in one short question, which day and time window suits them for our sales team to contact them (for example morning or afternoon). If they decline to give a time, accept that and move on.\"}, {\"type\": \"ask\", \"instruction\": \"Ask, in one short question, whether they prefer to be contacted by phone, WhatsApp or email. If they have no preference, accept that and move on.\"}, {\"type\": \"tell\", \"instruction\": \"In one sentence, repeat back the day/time and contact method they gave, and say our sales team will contact them to confirm. Never say that anything is booked, scheduled, confirmed or already sent.\"}]}",
+  "guardrails": [],
+  "referenced_procedure_ids": []
+}

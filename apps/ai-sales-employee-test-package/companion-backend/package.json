@@ -1,0 +1,14 @@
+{
+  "name": "real-estate-sales-agent-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Call orchestration, compliance checks and outcome processing for the ElevenLabs real estate sales agent",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "test": "node --test \"test/*.test.js\""
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "procedure_id": "agtprc_4501m5dptyn8en1v0kp29n9rdr0b",
+  "version_id": "agtprcv_6801m5dq0z11fk3bv983t685erxc",
+  "name": "Busy - call back later",
+  "type": "deterministic",
+  "trigger": "The prospect says they are busy right now or cannot talk, and is open to a call at another time.",
+  "content": "{\"steps\":[{\"type\":\"ask\",\"instruction\":\"Ask in one short question what day and time would be better for a callback. If they don't want to give one, accept that.\"},{\"type\":\"say\",\"message\":\"تمام، فريقنا هيتواصل مع حضرتك في الوقت ده. شكراً، مع السلامة.\",\"message_translations\":{\"en\":{\"value\":\"Great, our team will reach out at that time. Thank you, goodbye.\"}}},{\"type\":\"system_tool\",\"system_tool_name\":\"end_call\"}]}",
+  "guardrails": [],
+  "referenced_procedure_ids": []
+}

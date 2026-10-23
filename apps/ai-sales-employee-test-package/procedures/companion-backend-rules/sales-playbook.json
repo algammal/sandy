@@ -1,0 +1,230 @@
+{
+  "_comment": "Business rules for the AI Sales Employee B2B sales flow. Edit here, not in the prompt. Validated at startup by src/domain/playbook.js. The ElevenLabs workflow and KB doc 05 mirror this file (see docs/state-machine.md and scripts/render-objections-kb.js).",
+  "version": 1,
+  "languages": { "primary": "ar", "dialect": "Egyptian Arabic (Masri)", "supported": ["ar", "en"] },
+
+  "discovery": {
+    "required_fields": ["current_lead_process", "primary_challenge"],
+    "optional_fields": ["company_name", "contact_role", "sales_team_size", "lead_volume", "current_crm"],
+    "early_presentation_rule": "Move to SOLUTION_PRESENTATION before all required fields are known only if the prospect explicitly asks what the product does, or after 4 discovery questions."
+  },
+
+  "qualification": {
+    "hot": {
+      "all_of": ["interest_expressed", "relevant_need_identified", "concrete_next_step_agreed"],
+      "concrete_next_steps": ["demo_requested", "meeting_requested", "human_callback_requested", "proposal_requested"]
+    },
+    "warm": {
+      "any_of": [
+        ["relevant_need_identified", "interest_expressed"],
+        ["information_requested"],
+        ["relevant_need_identified", "needs_internal_approval"]
+      ]
+    },
+    "cold_when": ["no_need_identified", "low_interest"],
+    "unknown_when_fewer_than_signals": 1
+  },
+
+  "next_steps": {
+    "permitted": ["demo_requested", "meeting_requested", "human_callback_requested", "proposal_requested", "information_requested", "ai_callback_later", "none"],
+    "booking_integration_available": false,
+    "booking_unavailable_behaviour": "Capture preferred day/time and contact method; say the sales team will contact them to confirm. Never say it is booked."
+  },
+
+  "integrations": {
+    "elevenlabs_voice_calls": "current",
+    "post_call_outcomes_and_summary": "current",
+    "do_not_call_suppression": "current",
+    "crm_or_google_sheets": "planned",
+    "email": "planned",
+    "whatsapp": "planned",
+    "calendar_booking": "planned",
+    "live_transfer_to_human": "planned"
+  },
+
+  "limits": {
+    "max_objection_attempts_per_topic": 2,
+    "max_clarification_attempts": 2,
+    "max_discovery_questions": 4,
+    "max_state_entries": 4,
+    "max_turns_per_state": 8,
+    "max_tool_retries": 2,
+    "max_call_duration_seconds": 600,
+    "unresolved_intent_fallback": "Offer a human follow-up; if declined, close politely."
+  },
+
+  "approved_claims": [
+    "Holds natural first sales conversations by voice in Egyptian Arabic or English.",
+    "Always identifies itself as an AI.",
+    "Answers only from the client's approved information and admits when it doesn't know.",
+    "Qualifies leads against the client's criteria and produces a call outcome and summary.",
+    "Honours do-not-call requests immediately.",
+    "Hands qualified opportunities to the client's human sales team.",
+    "Designed to support sales teams, not replace them."
+  ],
+  "prohibited_claims": [
+    "Specific prices, packages, setup fees, discounts or contract terms",
+    "Guaranteed sales growth, conversion rates or savings",
+    "24/7 calling",
+    "Customer names, testimonials, case studies or performance statistics",
+    "Planned integrations (CRM, Google Sheets, email, WhatsApp, calendar booking, live transfer) described as available",
+    "Fixed onboarding timelines",
+    "Security certifications or legal guarantees",
+    "That a meeting or demo is booked or confirmed"
+  ],
+
+  "escalation_criteria": [
+    "Prospect asks for a human",
+    "Pricing, contract or negotiation questions",
+    "Technical integration specifics beyond the knowledge base",
+    "Legal, compliance or data-residency questions",
+    "Complaints",
+    "Same objection unresolved after the maximum attempts"
+  ],
+
+  "objections": [
+    {
+      "id": "already_has_sales_team",
+      "priority": 6,
+      "phrases": ["عندنا فريق مبيعات", "we already have a sales team", "مش محتاجين حد"],
+      "strategy": "Agree the team matters. Position the AI as handling first calls and repetitive questions so consultants spend time on serious buyers and closing.",
+      "kb_sources": ["01-product-overview.md#ai-led-first-conversation-human-led-closing"],
+      "required_disclosures": [],
+      "follow_up_question": "How much of your team's day goes into first calls to new leads?",
+      "escalate_when": "never",
+      "return_state": "previous"
+    },
+    {
+      "id": "already_uses_crm",
+      "priority": 7,
+      "phrases": ["عندنا CRM", "we use a CRM", "بنستخدم شيت"],
+      "strategy": "Acknowledge. Explain the AI handles conversations; CRM/Google Sheets sync is PLANNED, and today outcomes are delivered as structured call results.",
+      "kb_sources": ["02-capabilities-current-and-planned.md"],
+      "required_disclosures": ["CRM and Google Sheets integration is planned, not available yet."],
+      "follow_up_question": "Which CRM or sheet does your team use today?",
+      "escalate_when": "prospect needs integration specifics",
+      "return_state": "previous"
+    },
+    {
+      "id": "prefers_real_people",
+      "priority": 4,
+      "phrases": ["العملاء بيحبوا يكلموا بني آدم", "customers prefer real people"],
+      "strategy": "Agree trust matters. The AI is transparent, handles first contact only, and any customer who wants a person is passed to the team.",
+      "kb_sources": ["01-product-overview.md", "04-privacy-compliance-and-company.md"],
+      "required_disclosures": [],
+      "follow_up_question": "Would it help if serious buyers reached your consultants faster?",
+      "escalate_when": "never",
+      "return_state": "previous"
+    },
+    {
+      "id": "concerned_about_ai_voice",
+      "priority": 5,
+      "phrases": ["الصوت هيبان روبوت", "how natural does it sound", "هيبان إنه AI"],
+      "strategy": "Point out they are hearing it now. Offer a live demo with their own project information.",
+      "kb_sources": ["02-capabilities-current-and-planned.md"],
+      "required_disclosures": [],
+      "follow_up_question": "Would you like to hear it in a short demo using one of your projects?",
+      "escalate_when": "never",
+      "return_state": "NEXT_STEP_SELECTION"
+    },
+    {
+      "id": "asks_for_pricing",
+      "priority": 3,
+      "phrases": ["بكام", "السعر كام", "how much does it cost", "التكلفة"],
+      "strategy": "Pricing is NOT PROVIDED. Use the approved pricing answer and offer a meeting. Never give a number or range.",
+      "kb_sources": ["03-onboarding-and-pricing.md#pricing-and-commercial-terms"],
+      "required_disclosures": [],
+      "follow_up_question": "Would you like our sales team to prepare that in a short meeting?",
+      "escalate_when": "always",
+      "return_state": "NEXT_STEP_SELECTION"
+    },
+    {
+      "id": "how_does_it_know_inventory",
+      "priority": 9,
+      "phrases": ["هيعرف مشاريعنا ازاي", "how does it understand our inventory"],
+      "strategy": "Explain onboarding: the client provides approved project info, prices and FAQs; the AI answers only from that and says when it doesn't know.",
+      "kb_sources": ["03-onboarding-and-pricing.md#what-a-real-estate-company-provides-during-onboarding"],
+      "required_disclosures": [],
+      "follow_up_question": "How do you keep your project and price information today?",
+      "escalate_when": "never",
+      "return_state": "previous"
+    },
+    {
+      "id": "fits_existing_workflow",
+      "priority": 8,
+      "phrases": ["هيشتغل مع السيستم بتاعنا", "work with our existing workflow"],
+      "strategy": "Explain the hand-off: qualified leads go to their team. Integrations are PLANNED; specifics go to the sales team.",
+      "kb_sources": ["02-capabilities-current-and-planned.md"],
+      "required_disclosures": ["Automatic integrations are planned, not available yet."],
+      "follow_up_question": "How do leads reach your consultants today?",
+      "escalate_when": "prospect needs technical specifics",
+      "return_state": "previous"
+    },
+    {
+      "id": "measuring_performance",
+      "priority": 10,
+      "phrases": ["هنقيس النتيجة ازاي", "how do we measure performance"],
+      "strategy": "Each call produces an outcome and summary, so they can see calls made, qualified leads and hand-offs. A reporting dashboard is PLANNED. No performance statistics exist to quote.",
+      "kb_sources": ["02-capabilities-current-and-planned.md"],
+      "required_disclosures": ["A reporting dashboard is planned."],
+      "follow_up_question": "Which results would matter most to you?",
+      "escalate_when": "never",
+      "return_state": "previous"
+    },
+    {
+      "id": "privacy_concern",
+      "priority": 2,
+      "phrases": ["الخصوصية", "بيانات العملاء", "privacy", "customer trust"],
+      "strategy": "Use the approved privacy answer. No certifications or legal guarantees.",
+      "kb_sources": ["04-privacy-compliance-and-company.md"],
+      "required_disclosures": [],
+      "follow_up_question": "Would you like our team to walk you through the data details in a meeting?",
+      "escalate_when": "legal, certification or data-residency question",
+      "return_state": "previous"
+    },
+    {
+      "id": "requests_case_study",
+      "priority": 11,
+      "phrases": ["مين اشتغل معاكم", "case study", "عملاء سابقين"],
+      "strategy": "No case studies or testimonials are available to share. Offer a demo or pilot discussion with the team instead.",
+      "kb_sources": ["01-product-overview.md#what-we-do-not-claim"],
+      "required_disclosures": [],
+      "follow_up_question": "Would a short demo with your own project details help instead?",
+      "escalate_when": "always",
+      "return_state": "NEXT_STEP_SELECTION"
+    },
+    {
+      "id": "send_information",
+      "priority": 13,
+      "phrases": ["ابعتلي تفاصيل", "send me more information"],
+      "strategy": "Agree. Capture the channel; say the sales team will send it. Never claim it has been sent.",
+      "kb_sources": ["02-capabilities-current-and-planned.md"],
+      "required_disclosures": [],
+      "follow_up_question": "What's the best way for the team to send it to you?",
+      "escalate_when": "never",
+      "return_state": "FOLLOW_UP_CAPTURE"
+    },
+    {
+      "id": "needs_management_approval",
+      "priority": 12,
+      "phrases": ["لازم أرجع للإدارة", "need to discuss with management"],
+      "strategy": "Respect it. Offer a meeting that includes the decision maker, or information they can share internally.",
+      "kb_sources": [],
+      "required_disclosures": [],
+      "follow_up_question": "Would it help to set up a short meeting that includes them?",
+      "escalate_when": "never",
+      "return_state": "NEXT_STEP_SELECTION"
+    },
+    {
+      "id": "requests_human",
+      "priority": 1,
+      "phrases": ["عايز أكلم حد", "speak to a real person", "مش عايز أكلم روبوت"],
+      "strategy": "Stop the pitch. Arrange a callback from the human sales team; ask the best time.",
+      "kb_sources": [],
+      "required_disclosures": [],
+      "follow_up_question": "What's a good time for our team to call you?",
+      "escalate_when": "always",
+      "return_state": "FOLLOW_UP_CAPTURE"
+    }
+  ]
+}

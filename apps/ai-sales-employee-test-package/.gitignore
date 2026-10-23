@@ -1,0 +1,17 @@
+# Never commit secrets or runtime data
+.env
+.env.*
+!.env.example
+**/data/
+*.pem
+*.key
+*.sqlite
+# CLI auth and local tooling
+.elevenlabs/
+.config/
+node_modules/
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
