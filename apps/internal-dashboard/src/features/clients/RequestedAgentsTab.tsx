@@ -1,26 +1,41 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Bot, Sparkles } from "lucide-react";
+import { Bot, Upload, Sparkles } from "lucide-react";
 import type { Client } from "@sandy/shared-types";
 import { titleCase } from "@sandy/shared-utils";
 import { Button, EmptyState, GlassPanel, StatusBadge } from "@sandy/ui";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectClientForMapping, setActiveConfiguration } from "../../store/slices/agentConfigurationsSlice";
+import { ImportSubmissionDialog } from "./ImportSubmissionDialog";
 
 export function RequestedAgentsTab({ client }: { client: Client }) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const requests = useAppSelector((state) => state.agentRequests.byClientId[client.id] ?? []);
   const configurations = useAppSelector((state) => state.agentConfigurations.configurations);
+  const [isImportOpen, setIsImportOpen] = useState(false);
 
   if (requests.length === 0) {
     return (
-      <EmptyState
-        icon={<Bot className="size-6" />}
-        title="No agents requested yet"
-        description="This client hasn't configured any agent requests in the Client Portal."
-      />
+      <>
+        <EmptyState
+          icon={<Bot className="size-6" />}
+          title="No submission imported for this client yet"
+          description={
+            `Requested agents only appear here after you import that client's submission file from the Client Portal — ` +
+            `the two apps don't sync automatically in this demo phase. If the client says they've already configured ` +
+            `agents, ask them to download their submission from the Review & Submit screen, then import it below.`
+          }
+          action={
+            <Button onClick={() => setIsImportOpen(true)}>
+              <Upload className="size-4" /> Import Submission
+            </Button>
+          }
+        />
+        <ImportSubmissionDialog isOpen={isImportOpen} onClose={() => setIsImportOpen(false)} />
+      </>
     );
   }
 

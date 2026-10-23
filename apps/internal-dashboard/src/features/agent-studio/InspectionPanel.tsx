@@ -31,7 +31,7 @@ export function InspectionPanel() {
         <div>
           <h2 className="text-sm font-semibold text-[var(--sandy-foreground)]">{active.name}</h2>
           <p className="font-technical text-xs text-[var(--sandy-muted-foreground)]">
-            {active.importSource} · v{active.version}
+            {active.importSource} · v{active.version} · live working copy
           </p>
         </div>
         <StatusBadge
@@ -42,14 +42,20 @@ export function InspectionPanel() {
 
       <Tabs items={subTabs} value={subTab} onChange={setSubTab} />
 
+      {/*
+        Every tab below reads `mappedConfig` — the live working draft — not
+        `rawConfig`, so procedure toggles and mapping edits made in the
+        middle panel show up here immediately. `rawConfig` is preserved
+        untouched purely as the diff baseline for the right-hand panel.
+      */}
       {subTab === "editor" && (
-        <JsonEditor value={JSON.stringify(active.rawConfig, null, 2)} readOnly height={420} ariaLabel="Original configuration" />
+        <JsonEditor value={JSON.stringify(active.mappedConfig, null, 2)} readOnly height={420} ariaLabel="Working configuration" />
       )}
 
       {subTab === "structured" && (
         <ul className="flex max-h-[420px] flex-col gap-1.5 overflow-y-auto text-sm">
           {SUPPORTED_AGENT_FIELDS.map((field) => {
-            const value = getAtPath(active.rawConfig, field.path);
+            const value = getAtPath(active.mappedConfig, field.path);
             const isPresent = value !== undefined;
             return (
               <li
