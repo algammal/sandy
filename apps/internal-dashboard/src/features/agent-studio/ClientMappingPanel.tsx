@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowRight, Wand2 } from "lucide-react";
-import { Button, EmptyState, GlassPanel, Select, StatusBadge } from "@sandy/ui";
+import { Button, EmptyState, Select, StatusBadge } from "@sandy/ui";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchClients } from "../../store/slices/clientsSlice";
 import { fetchBusinessInfo } from "../../store/slices/businessInfoSlice";

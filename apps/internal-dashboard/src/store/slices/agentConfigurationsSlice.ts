@@ -1,10 +1,11 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { AgentConfiguration, AgentConfigImportSource, DraftConfigId, ID } from "@sandy/shared-types";
+import type { AgentConfiguration, AgentConfigImportSource, DraftConfigId, ID, JsonValue } from "@sandy/shared-types";
 import { toDraftConfigId } from "@sandy/shared-types";
 import { generateId } from "@sandy/shared-utils";
 import { parseAgentConfigJson } from "../../features/agent-studio/parseConfig";
 import { mapClientDataToAgentConfig, type ClientMappingContext } from "../../features/agent-studio/mapping";
-import { createBlankAgentTemplate } from "../../features/agent-studio/baseTemplate";
+import { createDefaultAgentTemplate } from "../../features/agent-studio/baseTemplate";
+import { buildStructuredProcedure } from "../../features/agent-studio/procedures";
 
 interface AgentConfigurationsState {
   configurations: AgentConfiguration[];
@@ -90,15 +91,17 @@ const agentConfigurationsSlice = createSlice({
 
     /**
      * Auto-generates one configuration draft per requested agent for a
-     * client, mapping their business data onto a blank base template
-     * immediately — this is the "automatically configured, editable
-     * afterwards" behavior triggered right after a client submission is
-     * imported, so staff never start from a totally empty workspace.
+     * client, mapping their business data onto the one default base
+     * template (see baseTemplate.ts) immediately — this is the
+     * "automatically configured, editable afterwards" behavior triggered
+     * right after a client submission is imported, so staff never start
+     * from a totally empty workspace. Every draft starts from the same
+     * template on purpose: it's the only one this phase ships.
      */
     generateDraftsForClient(state, action: PayloadAction<{ contexts: ClientMappingContext[] }>) {
       for (const context of action.payload.contexts) {
         if (!context.agentRequest) continue;
-        const rawConfig = createBlankAgentTemplate();
+        const rawConfig = createDefaultAgentTemplate();
         const { mappedConfig } = mapClientDataToAgentConfig(rawConfig, context);
         const agentLabel = context.agentRequest.label;
         const configuration: AgentConfiguration = {
@@ -123,6 +126,39 @@ const agentConfigurationsSlice = createSlice({
       state.configurations = state.configurations.filter((config) => config.id !== action.payload);
       if (state.activeConfigurationId === action.payload) state.activeConfigurationId = null;
     },
+
+    /**
+     * Procedures are a real, preserved-but-opaque top-level field (see
+     * configSchema.ts) — this is the first bit of structure this phase adds
+     * on top of that passthrough: staff can add a new deterministic
+     * procedure (shaped like the real sanitized export's structured
+     * procedures) or remove one. Written to `rawConfig` (not just
+     * `mappedConfig`) so the edit survives the next "Apply Rules" re-map,
+     * which never touches `procedures`.
+     */
+    addProcedureToActiveConfiguration(state, action: PayloadAction<{ name: string; trigger: string; message: string }>) {
+      const active = state.configurations.find((config) => config.id === state.activeConfigurationId);
+      if (!active) return;
+      const procedure = buildStructuredProcedure(action.payload);
+      for (const target of [active.rawConfig, active.mappedConfig]) {
+        const existing = target.procedures;
+        const list = Array.isArray(existing) ? existing : [];
+        target.procedures = [...list, procedure as unknown as JsonValue];
+      }
+    },
+
+    removeProcedureFromActiveConfiguration(state, action: PayloadAction<{ procedureId: string }>) {
+      const active = state.configurations.find((config) => config.id === state.activeConfigurationId);
+      if (!active) return;
+      for (const target of [active.rawConfig, active.mappedConfig]) {
+        const existing = target.procedures;
+        if (!Array.isArray(existing)) continue;
+        target.procedures = existing.filter((entry) => {
+          const procedureId = entry && typeof entry === "object" && !Array.isArray(entry) ? entry.procedure_id : undefined;
+          return procedureId !== action.payload.procedureId;
+        });
+      }
+    },
   },
 });
 
@@ -135,6 +171,8 @@ export const {
   commitActiveConfigurationToClient,
   generateDraftsForClient,
   removeConfiguration,
+  addProcedureToActiveConfiguration,
+  removeProcedureFromActiveConfiguration,
 } = agentConfigurationsSlice.actions;
 
 export default agentConfigurationsSlice.reducer;

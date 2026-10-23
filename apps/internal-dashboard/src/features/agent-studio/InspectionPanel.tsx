@@ -6,10 +6,13 @@ import { EmptyState, JsonEditor, StatusBadge, Tabs } from "@sandy/ui";
 import { useAppSelector } from "../../store/hooks";
 import { SUPPORTED_AGENT_FIELDS } from "./configSchema";
 import { getAtPath } from "./jsonPath";
+import { ProceduresPanel } from "./ProceduresPanel";
+import { listProcedures } from "./procedures";
 
 const subTabs = [
   { value: "editor", label: "JSON Editor" },
   { value: "structured", label: "Structured" },
+  { value: "procedures", label: "Procedures" },
   { value: "diagnostics", label: "Diagnostics" },
 ];
 
@@ -40,7 +43,11 @@ export function InspectionPanel() {
         />
       </div>
 
-      <Tabs items={subTabs} value={subTab} onChange={setSubTab} />
+      <Tabs
+        items={subTabs.map((tab) => (tab.value === "procedures" ? { ...tab, badge: listProcedures(active.mappedConfig).length } : tab))}
+        value={subTab}
+        onChange={setSubTab}
+      />
 
       {subTab === "editor" && (
         <JsonEditor value={JSON.stringify(active.rawConfig, null, 2)} readOnly height={420} ariaLabel="Original configuration" />
@@ -71,6 +78,12 @@ export function InspectionPanel() {
             );
           })}
         </ul>
+      )}
+
+      {subTab === "procedures" && (
+        <div className="max-h-[420px] overflow-y-auto">
+          <ProceduresPanel active={active} />
+        </div>
       )}
 
       {subTab === "diagnostics" && (
