@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nile Vista Properties — Voice Agent</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Nile Vista Properties <span class="tag">voice agent — local demo</span></h1>
+      <div id="modelInfo" class="model-info">Not connected yet.</div>
+    </header>
+
+    <main>
+      <section class="call-panel">
+        <button id="callButton" class="call-button idle">
+          <svg class="mic-icon" viewBox="0 0 24 24" width="36" height="36"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>
+          <span class="call-button-label">Start Call</span>
+        </button>
+        <div id="statusText" class="status-text">Not started.</div>
+        <div id="errorBanner" class="error-banner" hidden></div>
+
+        <label class="debug-toggle">
+          <input type="checkbox" id="debugToggle" />
+          Debug: type instead of speak
+        </label>
+        <div id="textInputRow" class="text-input-row" hidden>
+          <input id="textInput" type="text" placeholder="Type what the caller would say..." />
+          <button id="sendTextButton">Send</button>
+        </div>
+
+        <button id="resetButton" class="reset-button" disabled>New Call</button>
+      </section>
+
+      <section class="transcript-panel">
+        <h2>Transcript</h2>
+        <div id="transcript" class="transcript"></div>
+      </section>
+
+      <section class="debug-panel">
+        <details>
+          <summary>Tool calls (what the agent actually looked up — never trust the words alone)</summary>
+          <pre id="toolCalls">(none yet)</pre>
+        </details>
+      </section>
+    </main>
+
+    <audio id="player" hidden></audio>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

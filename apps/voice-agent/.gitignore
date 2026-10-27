@@ -8,5 +8,8 @@ models/piper/*.onnx.json
 test_audio/tts_debug/
 test_audio/pipeline_check/
 test_audio/webm_decode_check.webm
+<<<<<<< HEAD
 test_audio/voice_compare/
 test_audio/code_switch_check/
+=======
+>>>>>>> 11808ce292216197ef927b858111618d4d414878
