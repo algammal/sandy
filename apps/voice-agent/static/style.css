@@ -1,0 +1,117 @@
+:root {
+  --bg: #0f1115;
+  --panel: #171a21;
+  --border: #2a2e38;
+  --text: #e8e9ec;
+  --muted: #8b90a0;
+  --accent: #4f8cff;
+  --speaking: #35c77a;
+  --listening: #e0a93a;
+  --error: #e5484d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.app { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+
+header h1 { font-size: 20px; margin: 0 0 4px; }
+header .tag { font-size: 13px; color: var(--muted); font-weight: normal; }
+.model-info { font-size: 12px; color: var(--muted); margin-bottom: 20px; font-family: monospace; }
+
+main { display: grid; gap: 20px; grid-template-columns: 1fr; }
+
+.call-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+}
+
+.call-button {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: white;
+  background: var(--accent);
+  transition: background 0.2s, transform 0.2s;
+}
+.call-button:hover { transform: scale(1.04); }
+.call-button-label { font-size: 11px; }
+
+.call-button.listening { background: var(--listening); animation: pulse 1.2s infinite; }
+.call-button.thinking { background: var(--muted); }
+.call-button.speaking { background: var(--speaking); animation: pulse 1.2s infinite; }
+.call-button.active { background: var(--error); }
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.35); }
+  70% { box-shadow: 0 0 0 16px rgba(255,255,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+
+.status-text { margin-top: 14px; font-size: 14px; color: var(--muted); min-height: 18px; }
+
+.error-banner {
+  margin-top: 12px;
+  background: rgba(229,72,77,0.15);
+  border: 1px solid var(--error);
+  color: #ffb3b5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.debug-toggle { display: block; margin-top: 20px; font-size: 13px; color: var(--muted); cursor: pointer; }
+.debug-toggle input { margin-right: 6px; }
+
+.text-input-row { display: flex; gap: 8px; margin-top: 12px; }
+.text-input-row input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #0c0e12;
+  color: var(--text);
+}
+.text-input-row button, .reset-button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #22262f;
+  color: var(--text);
+  cursor: pointer;
+}
+.reset-button { margin-top: 18px; }
+.reset-button:disabled, .text-input-row button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.transcript-panel, .debug-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+}
+.transcript-panel h2 { font-size: 14px; margin: 0 0 12px; color: var(--muted); }
+
+.transcript { display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto; }
+.msg { padding: 10px 14px; border-radius: 10px; max-width: 85%; font-size: 14px; line-height: 1.4; }
+.msg.you { align-self: flex-end; background: var(--accent); }
+.msg.agent { align-self: flex-start; background: #22262f; }
+.msg .lang { font-size: 10px; opacity: 0.7; display: block; margin-top: 4px; }
+
+.debug-panel summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+.debug-panel pre { font-size: 12px; white-space: pre-wrap; color: var(--muted); max-height: 240px; overflow-y: auto; }

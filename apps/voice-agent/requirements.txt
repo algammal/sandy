@@ -1,0 +1,10 @@
+requests>=2.31
+pytest>=8.0
+faster-whisper>=1.2
+av==12.3.0  # faster-whisper 1.2.x calls av.open(metadata_errors=...), which newer av (19.x) removed
+piper-tts>=1.8
+sounddevice>=0.5
+numpy>=1.26
+fastapi>=0.162
+uvicorn[standard]>=0.54
+websockets>=17.0  # also used directly by scripts/debug_ws_client.py as a test client
