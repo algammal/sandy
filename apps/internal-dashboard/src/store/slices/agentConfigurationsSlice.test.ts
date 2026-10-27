@@ -7,6 +7,7 @@ import reducer, {
   importConfig,
   removeProcedureFromActiveConfiguration,
   selectClientForMapping,
+  toggleProcedureInclusion,
 } from "./agentConfigurationsSlice";
 import type { AgentRequest, Client } from "@sandy/shared-types";
 import type { ClientMappingContext } from "../../features/agent-studio/mapping";
@@ -109,41 +110,19 @@ describe("agentConfigurationsSlice", () => {
     expect(state.configurations.every((c) => c.mappedConfig.name)).toBeTruthy();
   });
 
-  it("adds a procedure to the active configuration's raw and mapped config", () => {
-    let state = reducer(
-      undefined,
-      importConfig({ sourceText: JSON.stringify({ name: "Agent" }), importSource: "paste", name: "Import 1" }),
-    );
+  it("adds a custom procedure only to mappedConfig, leaving rawConfig as the untouched original", () => {
+    let state = reducer(undefined, importConfig({ sourceText: JSON.stringify({ name: "Agent" }), importSource: "paste", name: "Import 1" }));
     state = reducer(
       state,
       addProcedureToActiveConfiguration({ name: "Pricing question", trigger: "Caller asks about price.", message: "Our team will follow up." }),
     );
     const active = state.configurations.find((c) => c.id === state.activeConfigurationId);
-    const rawProcedures = active?.rawConfig.procedures;
-    const mappedProcedures = active?.mappedConfig.procedures;
-    expect(Array.isArray(rawProcedures) && rawProcedures).toHaveLength(1);
-    expect(Array.isArray(mappedProcedures) && mappedProcedures).toHaveLength(1);
+    expect(Array.isArray(active?.mappedConfig.procedures) && (active.mappedConfig.procedures as unknown[])).toHaveLength(1);
+    expect(active?.rawConfig.procedures).toBeUndefined();
   });
 
-  it("survives a re-map because procedures live on rawConfig, which mapping never touches", () => {
-    let state = reducer(
-      undefined,
-      importConfig({ sourceText: JSON.stringify({ name: "Agent" }), importSource: "paste", name: "Import 1" }),
-    );
-    state = reducer(
-      state,
-      addProcedureToActiveConfiguration({ name: "Pricing question", trigger: "Caller asks about price.", message: "Our team will follow up." }),
-    );
-    state = reducer(state, applyMappingToActiveConfiguration(mappingContext));
-    const active = state.configurations.find((c) => c.id === state.activeConfigurationId);
-    expect(Array.isArray(active?.mappedConfig.procedures) && active.mappedConfig.procedures).toHaveLength(1);
-  });
-
-  it("removes a procedure by id from both raw and mapped config", () => {
-    let state = reducer(
-      undefined,
-      importConfig({ sourceText: JSON.stringify({ name: "Agent" }), importSource: "paste", name: "Import 1" }),
-    );
+  it("deletes a custom procedure permanently", () => {
+    let state = reducer(undefined, importConfig({ sourceText: JSON.stringify({ name: "Agent" }), importSource: "paste", name: "Import 1" }));
     state = reducer(
       state,
       addProcedureToActiveConfiguration({ name: "Pricing question", trigger: "Caller asks about price.", message: "Our team will follow up." }),
@@ -151,10 +130,32 @@ describe("agentConfigurationsSlice", () => {
     const addedId = (
       state.configurations.find((c) => c.id === state.activeConfigurationId)?.mappedConfig.procedures as { procedure_id: string }[]
     )[0]?.procedure_id as string;
-
     state = reducer(state, removeProcedureFromActiveConfiguration({ procedureId: addedId }));
     const active = state.configurations.find((c) => c.id === state.activeConfigurationId);
     expect(active?.mappedConfig.procedures).toEqual([]);
-    expect(active?.rawConfig.procedures).toEqual([]);
+  });
+
+  it("toggling an imported procedure off excludes it from mappedConfig without touching rawConfig", () => {
+    const sourceText = JSON.stringify({
+      name: "Agent",
+      conversation_config: {},
+      procedures: [{ procedure_id: "agtprc_1", name: "Do-not-call request", trigger: "x", type: "deterministic", content: "{}", guardrails: [], referenced_procedure_ids: [] }],
+    });
+    let state = reducer(undefined, importConfig({ sourceText, importSource: "paste", name: "Import 1" }));
+    const configId = state.activeConfigurationId!;
+
+    // Imported procedures start included (mappedConfig starts as a clone of rawConfig).
+    let active = state.configurations.find((c) => c.id === configId);
+    expect(active?.mappedConfig.procedures).toHaveLength(1);
+
+    state = reducer(state, toggleProcedureInclusion({ procedureId: "agtprc_1" }));
+    active = state.configurations.find((c) => c.id === configId);
+    expect(active?.mappedConfig.procedures).toEqual([]);
+    expect(active?.rawConfig.procedures).toHaveLength(1); // original import untouched
+
+    // Toggling again re-includes it, restored from the rawConfig catalog.
+    state = reducer(state, toggleProcedureInclusion({ procedureId: "agtprc_1" }));
+    active = state.configurations.find((c) => c.id === configId);
+    expect(active?.mappedConfig.procedures).toHaveLength(1);
   });
 });

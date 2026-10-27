@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { mergeConfigFolder, type PickedFile } from "./folderImport";
 import { getAtPath } from "./jsonPath";
 
-const baseConfig = {
+const baseConfig: PickedFile = {
   path: "agent-config/agent.sanitized.json",
   content: JSON.stringify({
     name: "AI Sales Employee",
@@ -53,7 +53,7 @@ describe("mergeConfigFolder", () => {
   });
 
   it("does not duplicate a procedure that is already present on the base config", () => {
-    const baseWithProcedure = {
+    const baseWithProcedure: PickedFile = {
       path: "agent-config/agent.sanitized.json",
       content: JSON.stringify({
         name: "AI Sales Employee",

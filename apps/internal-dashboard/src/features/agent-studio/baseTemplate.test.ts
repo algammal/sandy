@@ -49,7 +49,6 @@ describe("createDefaultAgentTemplate", () => {
       compounds: [],
       faqs: [],
       contacts: [],
-      agentRequest: null,
     };
     const { mappedConfig } = mapClientDataToAgentConfig(createDefaultAgentTemplate(), context);
     expect(mappedConfig.name).toBe("Test Co");

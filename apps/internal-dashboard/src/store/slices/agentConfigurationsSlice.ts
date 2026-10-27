@@ -5,7 +5,7 @@ import { generateId } from "@sandy/shared-utils";
 import { parseAgentConfigJson } from "../../features/agent-studio/parseConfig";
 import { mapClientDataToAgentConfig, type ClientMappingContext } from "../../features/agent-studio/mapping";
 import { createDefaultAgentTemplate } from "../../features/agent-studio/baseTemplate";
-import { buildStructuredProcedure } from "../../features/agent-studio/procedures";
+import { buildStructuredProcedure, listProcedures } from "../../features/agent-studio/procedures";
 
 interface AgentConfigurationsState {
   configurations: AgentConfiguration[];
@@ -45,7 +45,10 @@ const agentConfigurationsSlice = createSlice({
         version: 1,
         importSource: action.payload.importSource,
         rawConfig: result.config,
-        mappedConfig: result.config,
+        // mappedConfig starts as a structural clone of rawConfig (not the same
+        // reference) so later procedure/mapping edits never mutate the
+        // immutable "original import" the right-hand diff compares against.
+        mappedConfig: JSON.parse(JSON.stringify(result.config)),
         supportedFieldPaths: result.supportedFieldPaths,
         unknownFieldPaths: result.unknownFieldPaths,
         validationIssues: result.issues,
@@ -70,7 +73,10 @@ const agentConfigurationsSlice = createSlice({
     applyMappingToActiveConfiguration(state, action: PayloadAction<ClientMappingContext>) {
       const active = state.configurations.find((config) => config.id === state.activeConfigurationId);
       if (!active) return;
-      const { mappedConfig } = mapClientDataToAgentConfig(active.rawConfig, action.payload);
+      // Map onto the current *working* config (mappedConfig), not the
+      // original import — otherwise re-applying mapping would silently
+      // discard any procedure include/exclude edits made in between.
+      const { mappedConfig } = mapClientDataToAgentConfig(active.mappedConfig, action.payload);
       active.mappedConfig = mappedConfig;
     },
 
@@ -102,7 +108,7 @@ const agentConfigurationsSlice = createSlice({
       for (const context of action.payload.contexts) {
         if (!context.agentRequest) continue;
         const rawConfig = createDefaultAgentTemplate();
-        const { mappedConfig } = mapClientDataToAgentConfig(rawConfig, context);
+        const { mappedConfig } = mapClientDataToAgentConfig(JSON.parse(JSON.stringify(rawConfig)), context);
         const agentLabel = context.agentRequest.label;
         const configuration: AgentConfiguration = {
           id: toDraftConfigId(generateId("agentcfg")),
@@ -128,36 +134,63 @@ const agentConfigurationsSlice = createSlice({
     },
 
     /**
-     * Procedures are a real, preserved-but-opaque top-level field (see
-     * configSchema.ts) — this is the first bit of structure this phase adds
-     * on top of that passthrough: staff can add a new deterministic
-     * procedure (shaped like the real sanitized export's structured
-     * procedures) or remove one. Written to `rawConfig` (not just
-     * `mappedConfig`) so the edit survives the next "Apply Rules" re-map,
-     * which never touches `procedures`.
+     * Adds a brand-new procedure that was never part of the original
+     * import. Written only to `mappedConfig` — `rawConfig` stays the
+     * untouched original so the right-hand diff panel correctly shows it as
+     * "added". Removing it again is a hard delete (see
+     * `removeProcedureFromActiveConfiguration`) since there's no catalog
+     * copy to restore it from.
      */
     addProcedureToActiveConfiguration(state, action: PayloadAction<{ name: string; trigger: string; message: string }>) {
       const active = state.configurations.find((config) => config.id === state.activeConfigurationId);
       if (!active) return;
       const procedure = buildStructuredProcedure(action.payload);
-      for (const target of [active.rawConfig, active.mappedConfig]) {
-        const existing = target.procedures;
-        const list = Array.isArray(existing) ? existing : [];
-        target.procedures = [...list, procedure as unknown as JsonValue];
-      }
+      const existing = active.mappedConfig.procedures;
+      const list = Array.isArray(existing) ? existing : [];
+      active.mappedConfig.procedures = [...list, procedure as unknown as JsonValue];
     },
 
+    /** Permanently deletes a procedure that only exists in the working draft (never part of the original import). */
     removeProcedureFromActiveConfiguration(state, action: PayloadAction<{ procedureId: string }>) {
       const active = state.configurations.find((config) => config.id === state.activeConfigurationId);
       if (!active) return;
-      for (const target of [active.rawConfig, active.mappedConfig]) {
-        const existing = target.procedures;
-        if (!Array.isArray(existing)) continue;
-        target.procedures = existing.filter((entry) => {
-          const procedureId = entry && typeof entry === "object" && !Array.isArray(entry) ? entry.procedure_id : undefined;
-          return procedureId !== action.payload.procedureId;
-        });
+      const existing = active.mappedConfig.procedures;
+      if (!Array.isArray(existing)) return;
+      active.mappedConfig.procedures = existing.filter((entry) => {
+        const id = entry && typeof entry === "object" && !Array.isArray(entry) ? entry.procedure_id : undefined;
+        return id !== action.payload.procedureId;
+      });
+    },
+
+    /**
+     * Toggles whether a procedure that came from the original import is
+     * included in the working draft. Reversible either way: excluding
+     * removes it from `mappedConfig.procedures`; re-including copies it back
+     * in from the untouched `rawConfig` catalog. `rawConfig` itself is never
+     * modified, so the toggle history doesn't matter — only current state.
+     */
+    toggleProcedureInclusion(state, action: PayloadAction<{ procedureId: string }>) {
+      const active = state.configurations.find((config) => config.id === state.activeConfigurationId);
+      if (!active) return;
+      const { procedureId } = action.payload;
+      const currentlyIncluded = listProcedures(active.mappedConfig).some((p) => p.procedure_id === procedureId);
+
+      if (currentlyIncluded) {
+        const existing = active.mappedConfig.procedures;
+        if (Array.isArray(existing)) {
+          active.mappedConfig.procedures = existing.filter((entry) => {
+            const id = entry && typeof entry === "object" && !Array.isArray(entry) ? entry.procedure_id : undefined;
+            return id !== procedureId;
+          });
+        }
+        return;
       }
+
+      const fromCatalog = listProcedures(active.rawConfig).find((p) => p.procedure_id === procedureId);
+      if (!fromCatalog) return;
+      const existing = active.mappedConfig.procedures;
+      const list = Array.isArray(existing) ? existing : [];
+      active.mappedConfig.procedures = [...list, fromCatalog as unknown as JsonValue];
     },
   },
 });
@@ -173,6 +206,7 @@ export const {
   removeConfiguration,
   addProcedureToActiveConfiguration,
   removeProcedureFromActiveConfiguration,
+  toggleProcedureInclusion,
 } = agentConfigurationsSlice.actions;
 
 export default agentConfigurationsSlice.reducer;

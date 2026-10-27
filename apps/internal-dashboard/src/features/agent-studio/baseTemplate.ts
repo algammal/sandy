@@ -2,8 +2,9 @@ import type { JsonValue } from "@sandy/shared-types";
 
 /**
  * The one default base template every auto-generated configuration draft
- * starts from. Its *structure* mirrors the real sanitized ElevenLabs export
- * in `apps/ai-sales-employee-test-package/agent-config/agent.sanitized.json`
+ * starts from, and the starting point shown in the manual Import panel. Its
+ * *structure* mirrors the real sanitized ElevenLabs export in
+ * `apps/ai-sales-employee-test-package/agent-config/agent.sanitized.json`
  * (asr, turn, tts, conversation, vad, agent.prompt.{llm,temperature,
  * built_in_tools}) — not a thin guessed subset — because the mapper and the
  * rest of Agent Studio are grounded in that real shape. The *content*
@@ -16,7 +17,9 @@ import type { JsonValue } from "@sandy/shared-types";
  * `agent.prompt.tools` is deliberately left unset (the real export doesn't
  * have that path either — it uses `tool_ids` + `built_in_tools`) so the
  * mapper's own default-tool logic applies the same way it does for any
- * import that lacks it.
+ * import that lacks it. `procedures` is also left unset — it's the real,
+ * preserved-but-opaque top-level field staff add to via the Agent Studio
+ * procedures panel.
  */
 export function createDefaultAgentTemplate(): Record<string, JsonValue> {
   return {
@@ -37,7 +40,6 @@ export function createDefaultAgentTemplate(): Record<string, JsonValue> {
       },
       tts: {
         model_id: "eleven_v3_conversational",
-        voice_id: null,
         stability: 0.5,
         speed: 1,
         similarity_boost: 0.8,

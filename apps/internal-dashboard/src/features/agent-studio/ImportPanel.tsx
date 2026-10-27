@@ -56,7 +56,7 @@ export function ImportPanel({ onImported }: ImportPanelProps) {
         Array.from(fileList)
           .filter((file) => /\.(json|md)$/i.test(file.name))
           .map(async (file) => ({
-            // webRelativePath carries the folder structure (e.g. "ai-sales-employee-test-package/agent-config/agent.sanitized.json")
+            // webkitRelativePath carries the folder structure (e.g. "ai-sales-employee-test-package/agent-config/agent.sanitized.json")
             path: (file as File & { webkitRelativePath?: string }).webkitRelativePath || file.name,
             content: await readFileAsText(file),
           })),
