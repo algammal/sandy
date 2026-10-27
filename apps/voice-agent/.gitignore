@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+models/piper/*.onnx
+models/piper/*.onnx.json
+test_audio/tts_debug/
+test_audio/pipeline_check/
+test_audio/webm_decode_check.webm
